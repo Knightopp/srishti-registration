@@ -2,87 +2,82 @@
 
 @layer base {
   :root {
-    --font-impact: 'Montserrat', sans-serif;
     --font-display: 'Montserrat', sans-serif;
-    --font-technical: 'IBM Plex Mono', monospace;
-    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-body: 'Plus Jakarta Sans', sans-serif;
+    --font-ledger: 'IBM Plex Mono', monospace;
 
-    --surface-0: #050608;
-    --surface-1: #080A0E;
-    --surface-2: #0D1015;
-    --surface-3: #13161C;
-
-    --accent-blue: #2563EB;
-    --accent-sky: #38BDF8;
-    --accent-cyan: #7DD3FC;
-
-    --text-primary: #E8E8EC;
-    --text-secondary: #9CA3AF;
-    --text-muted: #6B7280;
-    --text-faint: #4B5563;
+    /* Palette: Tournament Print & Dark Paper */
+    --paper-bg: #0D0F14;
+    --card-surface: #161922;
+    --card-surface-elevated: #1D212D;
+    --text-cream: #F3EFE6;
+    --text-slate: #8B92A0;
+    --text-muted: #565C69;
+    --accent-amber: #F59E0B;
+    --accent-amber-glow: rgba(245, 158, 11, 0.15);
+    --accent-emerald: #10B981;
+    --border-structural: #262B36;
+    --border-structural-light: #343B4A;
   }
 
   html {
     font-family: var(--font-body);
-    background-color: var(--surface-0);
-    color: var(--text-primary);
+    background-color: var(--paper-bg);
+    color: var(--text-cream);
+    -webkit-font-smoothing: antialiased;
   }
 
   body {
-    background-color: #050608 !important;
-    color: #E8E8EC !important;
+    background-color: #0D0F14 !important;
+    color: #F3EFE6 !important;
     min-height: 100vh;
   }
 }
 
-.text-gradient-27 {
-  background: linear-gradient(135deg, #FFFFFF 0%, #BAE6FD 30%, #38BDF8 65%, #2563EB 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+/* Custom Typography Utilities */
+.font-display {
+  font-family: 'Montserrat', sans-serif;
 }
 
-.bg-gradient-27 {
-  background: linear-gradient(135deg, #38BDF8 0%, #2563EB 60%, #1D4ED8 100%);
+.font-body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
-.bg-gradient-27-glow {
-  background: linear-gradient(135deg, #7DD3FC 0%, #38BDF8 40%, #2563EB 100%);
-  box-shadow: 0 0 35px rgba(56, 189, 248, 0.45), 0 0 70px rgba(37, 99, 235, 0.25);
+.font-ledger {
+  font-family: 'IBM Plex Mono', monospace;
 }
 
-.glow-ambient-blue {
-  box-shadow: 0 0 40px -10px rgba(37, 99, 235, 0.35);
+/* Tactile Card Stock Paper */
+.paper-surface {
+  background-color: #161922;
+  border: 1px solid #262B36;
 }
 
-/* Glass panel */
-.glass-panel {
-  background: rgba(13, 16, 21, 0.75);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+.paper-surface-elevated {
+  background-color: #1D212D;
+  border: 1px solid #343B4A;
 }
 
-.glass-panel-subtle {
-  background: rgba(8, 10, 14, 0.6);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+/* Subtle punch ticket perforation */
+.ticket-perforation {
+  background-image: radial-gradient(circle at center, transparent 4px, #161922 4px);
+  background-size: 16px 16px;
 }
 
 /* Custom scrollbars */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
 ::-webkit-scrollbar-track {
-  background: #080a0e;
+  background: #0D0F14;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
-  border-radius: 3px;
+  background: #262B36;
+  border-radius: 2px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #334155;
+  background: #343B4A;
 }
 
 /* Print styles for physical e-pass badges */
@@ -100,6 +95,8 @@
   .printable-pass-card {
     box-shadow: none !important;
     border: 2px solid #000 !important;
+    background: #FFFFFF !important;
+    color: #000000 !important;
     page-break-inside: avoid;
   }
 }

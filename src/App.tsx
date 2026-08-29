@@ -47,7 +47,7 @@ export function AppContent() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#050608] text-[#E8E8EC] antialiased selection:bg-[#2563EB] selection:text-white flex flex-col justify-between">
+    <div className="min-h-screen bg-[#0D0F14] text-[#F3EFE6] antialiased selection:bg-[#F59E0B] selection:text-[#0D0F14] flex flex-col justify-between">
       <div className="w-full">
         <PortalHeader
           currentTab={currentTab}
@@ -57,7 +57,7 @@ export function AppContent() {
           }}
         />
 
-        <main className="w-full py-6">
+        <main className="w-full">
           {currentTab === 'register' ? (
             <RegistrationPortal initialEventId={selectedEventId} />
           ) : (
@@ -66,8 +66,8 @@ export function AppContent() {
         </main>
       </div>
 
-      <footer className="w-full py-6 border-t border-white/10 text-center text-xs text-gray-500 font-mono no-print">
-        <p>SRISHTI 2.7 • Dedicated Registration & Ticketing Host • St. Thomas College</p>
+      <footer className="w-full py-6 border-t border-[#262B36] text-center font-ledger text-[11px] text-[#565C69] no-print">
+        <p>SRISHTI 2.7 • Dec 4–5, 2026 • St. Thomas College, Thrissur</p>
       </footer>
     </div>
   );

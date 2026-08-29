@@ -1,5 +1,5 @@
 import React from 'react';
-import { ShieldCheck, ExternalLink, Ticket, CheckCircle2 } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import srishtiLogo from '../assets/images/srishti-logo.png';
 import { useRegistration } from '../context/RegistrationContext';
 
@@ -12,73 +12,69 @@ export const PortalHeader: React.FC<PortalHeaderProps> = ({ currentTab, onSelect
   const { settings } = useRegistration();
 
   const handleReturnToMainSite = () => {
-    window.location.href = settings.mainSiteUrl || 'http://localhost:5173';
+    window.location.href = settings.mainSiteUrl || 'https://srishti-2-7.vercel.app';
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full glass-panel border-b border-white/10 backdrop-blur-xl">
+    <header className="sticky top-0 z-50 w-full bg-[#0D0F14]/95 backdrop-blur-md border-b border-[#262B36]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         
-        {/* Left: Brand Identity */}
-        <div className="flex items-center gap-3 cursor-pointer" onClick={() => onSelectTab('register')}>
-          <div className="relative w-9 h-9 rounded-xl overflow-hidden p-1 bg-white/5 border border-white/10 flex items-center justify-center">
-            <img src={srishtiLogo} alt="Srishti Logo" className="w-full h-full object-contain" />
+        {/* Brand & Fest Date Badge */}
+        <div 
+          className="flex items-center gap-3 cursor-pointer select-none" 
+          onClick={() => onSelectTab('register')}
+        >
+          <div className="w-8 h-8 rounded-lg p-1 bg-[#161922] border border-[#262B36] flex items-center justify-center">
+            <img src={srishtiLogo} alt="Srishti" className="w-full h-full object-contain" />
           </div>
           <div>
-            <div className="flex items-center gap-2">
-              <span className="font-extrabold tracking-tight text-white text-base font-['Montserrat']">
-                SRISHTI <span className="text-[#38BDF8]">2.7</span>
+            <div className="flex items-baseline gap-2">
+              <span className="font-display font-black text-lg tracking-tight text-[#F3EFE6]">
+                SRISHTI <span className="text-[#F59E0B]">2.7</span>
               </span>
-              <span className="hidden sm:inline-block px-2 py-0.5 text-[10px] uppercase font-bold tracking-widest bg-blue-500/20 text-blue-400 border border-blue-500/30 rounded-full">
-                Passes & Registration
+              <span className="text-[11px] font-ledger text-[#8B92A0] hidden sm:inline">
+                // DEC 4–5
               </span>
             </div>
-            <p className="text-[11px] text-gray-400 font-mono hidden md:block">
-              Dedicated Load-Isolated Ticketing Host
+            <p className="text-[10px] text-[#8B92A0] font-ledger hidden md:block">
+              St. Thomas College CS Department
             </p>
           </div>
         </div>
 
-        {/* Center: Tabs */}
-        <div className="flex items-center gap-1 bg-[#0d1015] p-1 rounded-xl border border-white/10">
+        {/* Center Tabs: Minimal, Functional */}
+        <div className="flex items-center gap-1 bg-[#161922] p-1 rounded-lg border border-[#262B36]">
           <button
             onClick={() => onSelectTab('register')}
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+            className={`px-3 py-1.5 rounded-md text-xs font-semibold tracking-wide transition-colors cursor-pointer ${
               currentTab === 'register'
-                ? 'bg-[#2563EB] text-white shadow-md'
-                : 'text-gray-400 hover:text-white hover:bg-white/5'
+                ? 'bg-[#F59E0B] text-[#0D0F14] font-bold'
+                : 'text-[#8B92A0] hover:text-[#F3EFE6]'
             }`}
           >
-            <Ticket className="w-3.5 h-3.5" />
-            <span>Get Passes</span>
+            Pass Ledger
           </button>
 
           <button
             onClick={() => onSelectTab('verify')}
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+            className={`px-3 py-1.5 rounded-md text-xs font-semibold tracking-wide transition-colors cursor-pointer ${
               currentTab === 'verify'
-                ? 'bg-[#2563EB] text-white shadow-md'
-                : 'text-gray-400 hover:text-white hover:bg-white/5'
+                ? 'bg-[#F59E0B] text-[#0D0F14] font-bold'
+                : 'text-[#8B92A0] hover:text-[#F3EFE6]'
             }`}
           >
-            <ShieldCheck className="w-3.5 h-3.5" />
-            <span>Verify Pass</span>
+            Verify Pass
           </button>
         </div>
 
-        {/* Right: Return to Main Site Button */}
+        {/* Right: Fest Website Direct Link */}
         <div className="flex items-center gap-3">
-          <div className="hidden lg:flex items-center gap-1.5 text-xs text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full border border-emerald-500/20">
-            <CheckCircle2 className="w-3.5 h-3.5" />
-            <span>Gateway Online</span>
-          </div>
-
           <button
             onClick={handleReturnToMainSite}
-            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-gray-300 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg transition-colors cursor-pointer"
+            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-[#8B92A0] hover:text-[#F3EFE6] bg-[#161922] hover:bg-[#1D212D] border border-[#262B36] rounded-lg transition-colors cursor-pointer"
           >
             <span>Fest Website</span>
-            <ExternalLink className="w-3 h-3 text-gray-400" />
+            <ArrowUpRight className="w-3.5 h-3.5 text-[#8B92A0]" />
           </button>
         </div>
 
