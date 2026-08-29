@@ -16,67 +16,51 @@ export const PortalHeader: React.FC<PortalHeaderProps> = ({ currentTab, onSelect
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-[#0D0F14]/95 backdrop-blur-md border-b border-[#262B36]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <header className="sticky top-4 z-50 w-full px-4 flex justify-center pointer-events-none mb-6">
+      <div className="glass-nav-pill pointer-events-auto rounded-full px-4 sm:px-6 py-2.5 flex items-center justify-between gap-4 sm:gap-8 max-w-4xl w-full">
         
-        {/* Brand & Fest Date Badge */}
+        {/* Brand Identity: Logo + srishti 2.7 */}
         <div 
-          className="flex items-center gap-3 cursor-pointer select-none" 
+          className="flex items-center gap-2.5 cursor-pointer select-none" 
           onClick={() => onSelectTab('register')}
         >
-          <div className="w-8 h-8 rounded-lg p-1 bg-[#161922] border border-[#262B36] flex items-center justify-center">
+          <div className="w-7 h-7 rounded-lg p-1 bg-white/5 border border-white/10 flex items-center justify-center">
             <img src={srishtiLogo} alt="Srishti" className="w-full h-full object-contain" />
           </div>
-          <div>
-            <div className="flex items-baseline gap-2">
-              <span className="font-display font-black text-lg tracking-tight text-[#F3EFE6]">
-                SRISHTI <span className="text-[#F59E0B]">2.7</span>
-              </span>
-              <span className="text-[11px] font-ledger text-[#8B92A0] hidden sm:inline">
-                // DEC 4–5
-              </span>
-            </div>
-            <p className="text-[10px] text-[#8B92A0] font-ledger hidden md:block">
-              St. Thomas College CS Department
-            </p>
-          </div>
+          <span className="font-['Montserrat'] font-black text-sm sm:text-base tracking-tight text-white">
+            srishti<span className="text-[#38BDF8] ml-1 font-['IBM_Plex_Mono']">2.7</span>
+          </span>
         </div>
 
-        {/* Center Tabs: Minimal, Functional */}
-        <div className="flex items-center gap-1 bg-[#161922] p-1 rounded-lg border border-[#262B36]">
+        {/* Navigation Tabs */}
+        <nav className="flex items-center gap-4 sm:gap-6 text-xs font-['Montserrat'] font-bold tracking-wider uppercase">
           <button
             onClick={() => onSelectTab('register')}
-            className={`px-3 py-1.5 rounded-md text-xs font-semibold tracking-wide transition-colors cursor-pointer ${
-              currentTab === 'register'
-                ? 'bg-[#F59E0B] text-[#0D0F14] font-bold'
-                : 'text-[#8B92A0] hover:text-[#F3EFE6]'
+            className={`transition-colors cursor-pointer ${
+              currentTab === 'register' ? 'text-[#38BDF8]' : 'text-white/60 hover:text-white'
             }`}
           >
-            Pass Ledger
+            Passes
           </button>
 
           <button
             onClick={() => onSelectTab('verify')}
-            className={`px-3 py-1.5 rounded-md text-xs font-semibold tracking-wide transition-colors cursor-pointer ${
-              currentTab === 'verify'
-                ? 'bg-[#F59E0B] text-[#0D0F14] font-bold'
-                : 'text-[#8B92A0] hover:text-[#F3EFE6]'
+            className={`transition-colors cursor-pointer ${
+              currentTab === 'verify' ? 'text-[#38BDF8]' : 'text-white/60 hover:text-white'
             }`}
           >
             Verify Pass
           </button>
-        </div>
+        </nav>
 
-        {/* Right: Fest Website Direct Link */}
-        <div className="flex items-center gap-3">
-          <button
-            onClick={handleReturnToMainSite}
-            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-[#8B92A0] hover:text-[#F3EFE6] bg-[#161922] hover:bg-[#1D212D] border border-[#262B36] rounded-lg transition-colors cursor-pointer"
-          >
-            <span>Fest Website</span>
-            <ArrowUpRight className="w-3.5 h-3.5 text-[#8B92A0]" />
-          </button>
-        </div>
+        {/* Fest Website Button */}
+        <button
+          onClick={handleReturnToMainSite}
+          className="px-4 py-1.5 rounded-full bg-gradient-27-glow text-white font-['Montserrat'] text-[11px] sm:text-xs font-bold uppercase tracking-wider hover:opacity-90 transition-opacity flex items-center gap-1.5 cursor-pointer leading-none whitespace-nowrap"
+        >
+          <span>Fest Site</span>
+          <ArrowUpRight className="w-3.5 h-3.5" />
+        </button>
 
       </div>
     </header>

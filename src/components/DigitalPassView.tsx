@@ -5,7 +5,8 @@ import {
   Share2, 
   Check, 
   ShieldCheck, 
-  ArrowLeft 
+  ArrowLeft,
+  ArrowUpRight
 } from 'lucide-react';
 import html2canvas from 'html2canvas';
 import confetti from 'canvas-confetti';
@@ -29,10 +30,10 @@ export const DigitalPassView: React.FC<DigitalPassViewProps> = ({
   useEffect(() => {
     try {
       confetti({
-        particleCount: 60,
+        particleCount: 70,
         spread: 60,
         origin: { y: 0.6 },
-        colors: ['#F59E0B', '#F3EFE6', '#10B981', '#161922'],
+        colors: ['#38BDF8', '#2563EB', '#7DD3FC', '#FFFFFF'],
       });
     } catch {}
   }, []);
@@ -46,7 +47,7 @@ export const DigitalPassView: React.FC<DigitalPassViewProps> = ({
       const canvas = await html2canvas(passCardRef.current, {
         scale: 3,
         useCORS: true,
-        backgroundColor: '#0D0F14',
+        backgroundColor: '#050608',
         logging: false,
       });
       const link = document.createElement('a');
@@ -75,120 +76,121 @@ export const DigitalPassView: React.FC<DigitalPassViewProps> = ({
       
       {/* Confirmed Header */}
       <div className="text-center mb-8">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded bg-[#10B981]/15 border border-[#10B981]/30 text-[#10B981] font-ledger text-xs font-bold mb-3">
+        <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-[#38BDF8] font-['IBM_Plex_Mono'] text-xs font-bold mb-3">
           <ShieldCheck className="w-3.5 h-3.5" />
-          <span>PASS ISSUED & CONFIRMED</span>
+          <span>PASS ISSUED & VERIFIED</span>
         </div>
-        <h1 className="font-display font-black text-3xl sm:text-4xl text-[#F3EFE6] tracking-tight">
-          Your Srishti 2.7 Entry Badge
+        <h1 className="font-['Montserrat'] font-black text-3xl sm:text-4xl text-white tracking-tight uppercase">
+          Official Entry Pass
         </h1>
-        <p className="font-body text-xs sm:text-sm text-[#8B92A0] mt-2 max-w-md mx-auto">
-          Save this pass on your phone or keep your Pass ID handy. Present the QR code at the desk on Dec 4 for badge printing.
+        <p className="text-xs sm:text-sm text-white/50 mt-2 max-w-md mx-auto font-light">
+          Save this pass on your phone or present the QR code at the registration desk for instant campus access.
         </p>
       </div>
 
       {/* Action Toolbar */}
-      <div className="flex flex-wrap items-center justify-center gap-3 mb-6 no-print">
+      <div className="flex flex-wrap items-center justify-center gap-3 mb-8 no-print">
         <button
           onClick={handleDownloadImage}
           disabled={isDownloading}
-          className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#F59E0B] hover:bg-[#d97706] text-[#0D0F14] font-body font-black text-xs uppercase tracking-wider transition-all cursor-pointer shadow-md"
+          className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-27-glow text-white font-['Montserrat'] font-bold text-xs uppercase tracking-wider transition-all cursor-pointer shadow-lg hover:opacity-90"
         >
-          <Download className="w-4 h-4 stroke-[2.5]" />
-          <span>{isDownloading ? 'Exporting...' : 'Save Pass Image (PNG)'}</span>
+          <Download className="w-4 h-4" />
+          <span>{isDownloading ? 'Exporting...' : 'Download Pass (PNG)'}</span>
         </button>
 
         <button
           onClick={handlePrint}
-          className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#161922] hover:bg-[#1D212D] text-[#F3EFE6] font-body font-semibold text-xs border border-[#262B36] transition-all cursor-pointer"
+          className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-white/[0.06] hover:bg-white/[0.1] text-white font-['Montserrat'] font-semibold text-xs border border-white/10 transition-all cursor-pointer"
         >
-          <Printer className="w-4 h-4 text-[#8B92A0]" />
+          <Printer className="w-4 h-4 text-white/60" />
           <span>Print</span>
         </button>
 
         <button
           onClick={handleCopyShareLink}
-          className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#161922] hover:bg-[#1D212D] text-[#F3EFE6] font-body font-semibold text-xs border border-[#262B36] transition-all cursor-pointer"
+          className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-white/[0.06] hover:bg-white/[0.1] text-white font-['Montserrat'] font-semibold text-xs border border-white/10 transition-all cursor-pointer"
         >
           {copiedLink ? (
             <>
-              <Check className="w-4 h-4 text-[#10B981]" />
-              <span className="text-[#10B981]">Link Copied</span>
+              <Check className="w-4 h-4 text-[#38BDF8]" />
+              <span className="text-[#38BDF8]">Link Copied</span>
             </>
           ) : (
             <>
-              <Share2 className="w-4 h-4 text-[#8B92A0]" />
-              <span>Copy Verification Link</span>
+              <Share2 className="w-4 h-4 text-white/60" />
+              <span>Copy Link</span>
             </>
           )}
         </button>
       </div>
 
-      {/* Physical Ticket / Pass Slip Layout */}
+      {/* Printable / Capturable Pass Card */}
       <div className="flex justify-center">
         <div
           ref={passCardRef}
           id="srishti-pass-card"
-          className="w-full max-w-xl bg-[#161922] rounded-2xl border-2 border-[#262B36] shadow-2xl p-6 sm:p-8 relative overflow-hidden text-[#F3EFE6] printable-pass-card"
+          className="w-full max-w-xl bg-gradient-to-b from-[#0d131f] via-[#080c14] to-[#050608] rounded-3xl border border-white/15 shadow-2xl p-6 sm:p-8 relative overflow-hidden text-white printable-pass-card"
         >
-          {/* Card Top Border Accent */}
-          <div className="absolute top-0 left-0 right-0 h-1.5 bg-[#F59E0B]" />
+          {/* Subtle Atmospheric Light Glow */}
+          <div className="absolute top-0 right-0 w-72 h-72 bg-[#2563EB]/15 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute bottom-0 left-0 w-72 h-72 bg-[#38BDF8]/10 rounded-full blur-3xl pointer-events-none" />
 
           {/* Header Row */}
-          <div className="flex items-start justify-between border-b border-[#262B36] pb-5 pt-1">
+          <div className="relative z-10 flex items-start justify-between border-b border-white/10 pb-5">
             <div className="flex items-center gap-3">
-              <div className="w-11 h-11 rounded-lg bg-[#0D0F14] p-1.5 border border-[#262B36] flex items-center justify-center">
+              <div className="w-12 h-12 rounded-xl bg-white/10 p-1.5 border border-white/15 flex items-center justify-center">
                 <img src={srishtiLogo} alt="Srishti" className="w-full h-full object-contain" />
               </div>
               <div>
-                <span className="font-ledger text-[10px] uppercase tracking-widest text-[#F59E0B] block font-bold">
-                  OFFICIAL DELEGATE BADGE
+                <span className="font-['IBM_Plex_Mono'] text-[10px] uppercase tracking-widest text-[#38BDF8] block font-bold">
+                  OFFICIAL ACCESS BADGE
                 </span>
-                <h2 className="font-display font-black text-2xl text-[#F3EFE6] leading-tight">
-                  SRISHTI <span className="text-[#F59E0B]">2.7</span>
+                <h2 className="font-['Montserrat'] font-black text-2xl text-white tracking-tight">
+                  SRISHTI <span className="text-[#38BDF8]">2.7</span>
                 </h2>
-                <span className="font-ledger text-[11px] text-[#8B92A0]">Dec 4–5, 2026 • St. Thomas College</span>
+                <span className="font-['IBM_Plex_Mono'] text-[11px] text-white/50">Dec 4–5, 2026 • St. Thomas College</span>
               </div>
             </div>
 
-            <div className="text-right font-ledger">
-              <span className="text-[10px] text-[#565C69] uppercase tracking-wider block">PASS ID</span>
-              <span className="text-base sm:text-lg font-black text-[#F59E0B] bg-[#0D0F14] px-3 py-1 rounded border border-[#262B36] inline-block mt-0.5">
+            <div className="text-right font-['IBM_Plex_Mono']">
+              <span className="text-[10px] text-white/40 uppercase tracking-wider block">PASS ID</span>
+              <span className="text-base sm:text-lg font-black text-[#38BDF8] bg-sky-500/10 px-3 py-1 rounded-xl border border-sky-500/30 inline-block mt-0.5">
                 {record.passId}
               </span>
             </div>
           </div>
 
           {/* Attendee Info Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 my-6">
+          <div className="relative z-10 grid grid-cols-1 sm:grid-cols-3 gap-6 my-6">
             
             {/* Left 2 Cols: Details */}
             <div className="sm:col-span-2 space-y-4">
               <div>
-                <span className="font-ledger text-[10px] text-[#565C69] uppercase tracking-wider block">
+                <span className="font-['IBM_Plex_Mono'] text-[10px] text-white/40 uppercase tracking-wider block">
                   PARTICIPANT NAME
                 </span>
-                <p className="font-display font-black text-xl text-[#F3EFE6] mt-0.5">{record.fullName}</p>
-                <p className="font-ledger text-xs text-[#8B92A0]">{record.email} • {record.phone}</p>
+                <p className="font-['Montserrat'] font-extrabold text-xl text-white mt-0.5">{record.fullName}</p>
+                <p className="font-['IBM_Plex_Mono'] text-xs text-white/50">{record.email} • {record.phone}</p>
               </div>
 
-              <div className="grid grid-cols-2 gap-3 pt-1 font-body text-xs">
+              <div className="grid grid-cols-2 gap-3 pt-1 text-xs">
                 <div>
-                  <span className="font-ledger text-[10px] text-[#565C69] uppercase tracking-wider block">
+                  <span className="font-['IBM_Plex_Mono'] text-[10px] text-white/40 uppercase tracking-wider block">
                     INSTITUTION
                   </span>
-                  <p className="font-bold text-[#F3EFE6] mt-0.5 truncate">{record.college}</p>
-                  <p className="text-[#8B92A0]">{record.department} ({record.year})</p>
+                  <p className="font-semibold text-white mt-0.5 truncate">{record.college}</p>
+                  <p className="text-white/50">{record.department} ({record.year})</p>
                 </div>
 
                 <div>
-                  <span className="font-ledger text-[10px] text-[#565C69] uppercase tracking-wider block">
-                    ENTRY STATUS
+                  <span className="font-['IBM_Plex_Mono'] text-[10px] text-white/40 uppercase tracking-wider block">
+                    PASS TYPE
                   </span>
-                  <p className="font-ledger font-bold text-[#10B981] mt-0.5">
-                    {record.totalFee === 0 ? 'FREE ACCESS' : `PAID (₹${record.totalFee})`}
+                  <p className="font-['IBM_Plex_Mono'] font-bold text-[#38BDF8] mt-0.5">
+                    {record.totalFee === 0 ? 'FREE PASS' : `PAID PASS (₹${record.totalFee})`}
                   </p>
-                  <p className="text-[#8B92A0]">
+                  <p className="text-white/50">
                     {record.teamName ? `Team: ${record.teamName}` : 'Individual'}
                   </p>
                 </div>
@@ -196,14 +198,14 @@ export const DigitalPassView: React.FC<DigitalPassViewProps> = ({
 
               {/* Claimed Events List */}
               <div className="pt-2">
-                <span className="font-ledger text-[10px] text-[#565C69] uppercase tracking-wider block mb-1.5">
-                  CLAIMED EVENTS ({record.selectedEventNames.length})
+                <span className="font-['IBM_Plex_Mono'] text-[10px] text-white/40 uppercase tracking-wider block mb-1.5">
+                  REGISTERED EVENTS ({record.selectedEventNames.length})
                 </span>
                 <div className="flex flex-wrap gap-1.5">
                   {record.selectedEventNames.map((name, idx) => (
                     <span 
                       key={idx} 
-                      className="px-2 py-0.5 rounded bg-[#0D0F14] border border-[#262B36] font-body text-[11px] font-semibold text-[#F3EFE6]"
+                      className="px-2.5 py-0.5 rounded-md bg-white/5 border border-white/10 text-[11px] font-medium text-sky-200"
                     >
                       {name}
                     </span>
@@ -213,13 +215,13 @@ export const DigitalPassView: React.FC<DigitalPassViewProps> = ({
             </div>
 
             {/* Right Col: Verified Center-Logo QR */}
-            <div className="flex flex-col items-center justify-center p-3 rounded-xl bg-[#0D0F14] border border-[#262B36]">
+            <div className="flex flex-col items-center justify-center p-3 rounded-2xl bg-[#080c14] border border-white/10">
               <CustomSrishtiQR value={verificationUrl} size={135} />
-              <div className="mt-2 text-center font-ledger">
-                <span className="text-[9px] text-[#10B981] uppercase font-bold tracking-wider flex items-center justify-center gap-1">
-                  <ShieldCheck className="w-3 h-3" /> VERIFIED ENTRY
+              <div className="mt-2 text-center font-['IBM_Plex_Mono']">
+                <span className="text-[9px] text-[#38BDF8] uppercase font-bold tracking-wider flex items-center justify-center gap-1">
+                  <ShieldCheck className="w-3 h-3" /> VERIFIED BADGE
                 </span>
-                <span className="text-[8px] text-[#565C69] block truncate max-w-[125px] mt-0.5">
+                <span className="text-[8px] text-white/40 block truncate max-w-[125px] mt-0.5">
                   {record.securityHash}
                 </span>
               </div>
@@ -227,12 +229,12 @@ export const DigitalPassView: React.FC<DigitalPassViewProps> = ({
 
           </div>
 
-          {/* Ticket Perforation Bottom Bar */}
-          <div className="pt-4 border-t border-dashed border-[#343B4A] flex items-center justify-between font-ledger text-[11px] text-[#8B92A0]">
+          {/* Tear Strip Bottom Bar */}
+          <div className="relative z-10 pt-4 border-t border-dashed border-white/20 flex items-center justify-between font-['IBM_Plex_Mono'] text-[11px] text-white/50">
             <div>
-              <span>Thrissur, Kerala • CS Dept</span>
+              <span>Dec 4–5, 2026 • Main Campus</span>
             </div>
-            <div className="text-[10px] text-[#565C69]">
+            <div className="text-[10px] text-white/40">
               Issued: {new Date(record.registeredAt).toLocaleDateString()}
             </div>
           </div>
@@ -245,7 +247,7 @@ export const DigitalPassView: React.FC<DigitalPassViewProps> = ({
         <div className="text-center mt-8 no-print">
           <button
             onClick={onNewRegistration}
-            className="inline-flex items-center gap-2 font-body text-xs font-semibold text-[#8B92A0] hover:text-[#F3EFE6] transition-colors cursor-pointer"
+            className="inline-flex items-center gap-2 font-['Montserrat'] text-xs font-bold uppercase tracking-wider text-white/60 hover:text-white transition-colors cursor-pointer"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>Register another participant</span>
