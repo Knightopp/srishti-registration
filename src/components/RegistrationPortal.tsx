@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Check, X, ArrowUpRight, ChevronUp, Ticket } from 'lucide-react';
+import { Check, X, ArrowUpRight, ChevronUp, Ticket, Users } from 'lucide-react';
 import QRCode from 'qrcode';
 import { useRegistration } from '../context/RegistrationContext';
-import { RegistrationRecord, EventItem } from '../types/registration';
+import { RegistrationRecord } from '../types/registration';
 import { DigitalPassView } from './DigitalPassView';
 
 interface RegistrationPortalProps {
@@ -56,6 +56,11 @@ export const RegistrationPortal: React.FC<RegistrationPortalProps> = ({ initialE
   const selectedEvents = events.filter((e) => selectedEventIds.includes(e.id));
   const totalFee = selectedEvents.reduce((sum, e) => sum + (e.fee || 0), 0);
 
+  // Check if any selected event requires a team
+  const hasTeamEvent = selectedEvents.some(
+    (e) => e.teamSize && !e.teamSize.toLowerCase().includes('solo')
+  );
+
   // Generate UPI QR Code dynamically
   useEffect(() => {
     if (totalFee > 0 && settings.upiId) {
@@ -70,17 +75,17 @@ export const RegistrationPortal: React.FC<RegistrationPortalProps> = ({ initialE
     }
   }, [totalFee, settings.upiId]);
 
-  // Filter events by category
-  const categories = ['ALL', 'HACKATHON', 'CODING', 'SECURITY', 'DESIGN', 'WORKSHOP', 'CULTURAL'];
+  // Filter categories
+  const categories = ['ALL', 'CODING', 'ROBOTICS', 'WEB & AI', 'IDEATHON', 'GAMES', 'DANCE & ARTS'];
 
   const filteredEvents = events.filter((ev) => {
     if (activeCategory === 'ALL') return true;
-    if (activeCategory === 'HACKATHON') return ev.id === 'hackathon';
-    if (activeCategory === 'CODING') return ev.id === 'code-clash';
-    if (activeCategory === 'SECURITY') return ev.id === 'ctf';
-    if (activeCategory === 'DESIGN') return ev.id === 'ui-design';
-    if (activeCategory === 'WORKSHOP') return ev.id === 'ev-4';
-    if (activeCategory === 'CULTURAL') return ['ev-1', 'ev-5', 'ev-6', 'ev-9', 'ev-10'].includes(ev.id);
+    if (activeCategory === 'CODING') return ['codex', 'debugging', 'blind-coding'].includes(ev.id);
+    if (activeCategory === 'ROBOTICS') return ev.id === 'tracebot';
+    if (activeCategory === 'WEB & AI') return ev.id === 'ai-webdev';
+    if (activeCategory === 'IDEATHON') return ev.id === 'ideathon';
+    if (activeCategory === 'GAMES') return ['treasure-hunt', 'mind-game', 'tech-quiz'].includes(ev.id);
+    if (activeCategory === 'DANCE & ARTS') return ['waltz', 'face-painting'].includes(ev.id);
     return true;
   });
 
@@ -138,6 +143,7 @@ export const RegistrationPortal: React.FC<RegistrationPortalProps> = ({ initialE
           setPhone('');
           setCollege('');
           setDepartment('');
+          setTeamName('');
           setPaymentUtr('');
         }}
       />
@@ -150,13 +156,13 @@ export const RegistrationPortal: React.FC<RegistrationPortalProps> = ({ initialE
       {/* Top Section Tag & Impact Title matching original website */}
       <div className="mb-8 select-none">
         <span className="font-['IBM_Plex_Mono'] text-xs font-semibold text-[#38BDF8] tracking-widest uppercase block mb-3">
-          01 // FEATURED EVENTS & PASSES
+          01 // OFFICIAL FEST EVENTS & PASSES
         </span>
         <h1 className="font-['Montserrat'] font-black text-3xl sm:text-5xl lg:text-6xl text-white tracking-tight uppercase leading-[0.95] m-0 p-0">
           EVENT SHOWCASE
         </h1>
         <p className="font-['Plus_Jakarta_Sans'] text-sm sm:text-base text-white/50 mt-3 max-w-2xl font-light">
-          Competitions, hackathons, cybersecurity operations, workshops, and cultural performances. Select your events to build your entry pass.
+          11 Official events including Coding, Robotics, Ideathon, Dance, and Strategy. Select your passes below to register.
         </p>
       </div>
 
@@ -200,9 +206,17 @@ export const RegistrationPortal: React.FC<RegistrationPortalProps> = ({ initialE
               >
                 {/* Event Top Tag: EVENT #01 • CATEGORY • PRICE */}
                 <div className="flex items-center justify-between gap-2 mb-3">
-                  <span className="font-['IBM_Plex_Mono'] text-[11px] sm:text-xs font-bold text-[#38BDF8] tracking-wider uppercase">
-                    EVENT #{ev.number} • {ev.category.toUpperCase()} • {isFree ? 'FREE' : `₹${ev.fee}`}
-                  </span>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="font-['IBM_Plex_Mono'] text-[11px] sm:text-xs font-bold text-[#38BDF8] tracking-wider uppercase">
+                      EVENT #{ev.number} • {ev.category.toUpperCase()} • {isFree ? 'FREE' : `₹${ev.fee}`}
+                    </span>
+                    {ev.teamSize && (
+                      <span className="px-2 py-0.5 rounded-full bg-sky-500/10 border border-sky-500/30 text-[#38BDF8] text-[10px] font-['IBM_Plex_Mono'] font-semibold flex items-center gap-1">
+                        <Users className="w-3 h-3" />
+                        <span>{ev.teamSize}</span>
+                      </span>
+                    )}
+                  </div>
 
                   <div
                     className={`w-5 h-5 rounded-md flex items-center justify-center border transition-all ${
@@ -243,7 +257,7 @@ export const RegistrationPortal: React.FC<RegistrationPortalProps> = ({ initialE
                     <span className="text-white/70 font-semibold">{ev.venue}</span>
                   </div>
                   <div>
-                    <span className="text-white/30 block uppercase tracking-wider text-[9px]">PRIZE</span>
+                    <span className="text-white/30 block uppercase tracking-wider text-[9px]">PRIZE POOL</span>
                     <span className="text-[#38BDF8] font-bold">{ev.prize || 'Certificates'}</span>
                   </div>
                 </div>
@@ -272,7 +286,7 @@ export const RegistrationPortal: React.FC<RegistrationPortalProps> = ({ initialE
           })}
         </div>
 
-        {/* Right Column (5 cols): Pass Slip & Checkout Panel matching original aesthetic */}
+        {/* Right Column (5 cols): Pass Slip & Checkout Panel */}
         <div className="hidden lg:block lg:col-span-5 sticky top-24">
           <div className="bg-[#080A0E] border border-white/[0.1] rounded-2xl p-6 shadow-2xl relative overflow-hidden">
             
@@ -306,9 +320,16 @@ export const RegistrationPortal: React.FC<RegistrationPortalProps> = ({ initialE
                     key={ev.id} 
                     className="flex items-center justify-between p-2.5 rounded-xl bg-[#0D1015] border border-white/[0.08] text-xs"
                   >
-                    <span className="font-medium text-white truncate max-w-[200px]">
-                      {ev.title}
-                    </span>
+                    <div>
+                      <span className="font-medium text-white block truncate max-w-[200px]">
+                        {ev.title}
+                      </span>
+                      {ev.teamSize && (
+                        <span className="text-[10px] text-white/40 font-['IBM_Plex_Mono']">
+                          {ev.teamSize}
+                        </span>
+                      )}
+                    </div>
                     <div className="flex items-center gap-2">
                       <span className="font-['IBM_Plex_Mono'] font-bold text-[#38BDF8]">
                         {ev.fee === 0 ? 'FREE' : `₹${ev.fee}`}
@@ -345,7 +366,7 @@ export const RegistrationPortal: React.FC<RegistrationPortalProps> = ({ initialE
             <form onSubmit={handleSubmit} className="space-y-3.5">
               <div>
                 <label className="block text-xs font-semibold text-white/70 mb-1">
-                  Full Name *
+                  Full Name (Primary Contact / Team Leader) *
                 </label>
                 <input
                   type="text"
@@ -433,6 +454,23 @@ export const RegistrationPortal: React.FC<RegistrationPortalProps> = ({ initialE
                 </div>
               </div>
 
+              {/* Team Name if team event selected */}
+              {hasTeamEvent && (
+                <div>
+                  <label className="block text-xs font-semibold text-[#38BDF8] mb-1 flex items-center gap-1.5">
+                    <Users className="w-3.5 h-3.5" />
+                    <span>Team / Squad Name (For Team Events)</span>
+                  </label>
+                  <input
+                    type="text"
+                    value={teamName}
+                    onChange={(e) => setTeamName(e.target.value)}
+                    placeholder="e.g. CyberKnights / ByteSquad"
+                    className="w-full bg-[#050608] border border-[#38BDF8]/40 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder-white/20 focus:outline-none focus:border-[#38BDF8]"
+                  />
+                </div>
+              )}
+
               {/* Dynamic UPI Payment Box if Fee > 0 */}
               {totalFee > 0 && upiQrUrl && (
                 <div className="p-3.5 rounded-xl bg-[#050608] border border-white/[0.12] flex items-center gap-4">
@@ -514,7 +552,7 @@ export const RegistrationPortal: React.FC<RegistrationPortalProps> = ({ initialE
 
             <form onSubmit={handleSubmit} className="space-y-3.5">
               <div>
-                <label className="block text-xs font-semibold text-white/70 mb-1">Full Name *</label>
+                <label className="block text-xs font-semibold text-white/70 mb-1">Full Name (Leader / Participant) *</label>
                 <input
                   type="text"
                   required
@@ -560,6 +598,19 @@ export const RegistrationPortal: React.FC<RegistrationPortalProps> = ({ initialE
                   className="w-full bg-[#050608] border border-white/[0.12] rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-[#38BDF8]"
                 />
               </div>
+
+              {hasTeamEvent && (
+                <div>
+                  <label className="block text-xs font-semibold text-[#38BDF8] mb-1">Team / Squad Name</label>
+                  <input
+                    type="text"
+                    value={teamName}
+                    onChange={(e) => setTeamName(e.target.value)}
+                    placeholder="e.g. ByteSquad"
+                    className="w-full bg-[#050608] border border-[#38BDF8]/40 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-[#38BDF8]"
+                  />
+                </div>
+              )}
 
               {totalFee > 0 && upiQrUrl && (
                 <div className="p-3 rounded-xl bg-[#050608] border border-white/[0.12] flex items-center gap-3">

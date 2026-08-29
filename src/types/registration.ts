@@ -14,6 +14,7 @@ export interface EventItem {
   bgGradient: string;
   image: string;
   fee: number; // in INR (0 for free)
+  teamSize?: string; // Team requirement e.g. Team of 4, Solo
   isParticipating?: boolean;
   day?: 'dec-4' | 'dec-5';
   dayLabel?: string;
