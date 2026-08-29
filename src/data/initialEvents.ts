@@ -7,7 +7,7 @@ export const DEFAULT_SETTINGS: SystemSettings = {
   contactPhone: '+91 98765 43210',
   collegeName: 'St. Thomas College',
   cloudDbUrl: 'https://script.google.com/macros/s/AKfycbxtHO-ypMU7h-pYeR0_JpZ_kaeTEQDaoqvz_OoFhk3Vx1QrTECvXsEIbMayPtH838Tj/exec',
-  mainSiteUrl: 'http://localhost:5173',
+  mainSiteUrl: (import.meta as any).env?.VITE_MAIN_SITE_URL || 'https://srishti-2-7.vercel.app',
 };
 
 export const DEFAULT_EVENTS: EventItem[] = [
