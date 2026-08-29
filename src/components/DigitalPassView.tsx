@@ -5,7 +5,6 @@ import {
   Share2, 
   Check, 
   ShieldCheck, 
-  Sparkles, 
   Ticket, 
   Calendar, 
   MapPin, 
@@ -99,7 +98,7 @@ export const DigitalPassView: React.FC<DigitalPassViewProps> = ({
         <button
           onClick={handleDownloadImage}
           disabled={isDownloading}
-          className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#38BDF8] to-[#2563EB] text-white font-semibold text-sm shadow-lg hover:shadow-cyan-500/20 hover:scale-[1.02] active:scale-[0.98] transition-all"
+          className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#38BDF8] to-[#2563EB] text-white font-semibold text-sm shadow-lg hover:shadow-cyan-500/20 hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
         >
           <Download className="w-4 h-4" />
           <span>{isDownloading ? 'Exporting HD Pass...' : 'Download Pass (PNG)'}</span>
@@ -107,7 +106,7 @@ export const DigitalPassView: React.FC<DigitalPassViewProps> = ({
 
         <button
           onClick={handlePrint}
-          className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/15 text-white font-medium text-sm border border-white/10 transition-all"
+          className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/15 text-white font-medium text-sm border border-white/10 transition-all cursor-pointer"
         >
           <Printer className="w-4 h-4 text-gray-300" />
           <span>Print Pass</span>
@@ -115,7 +114,7 @@ export const DigitalPassView: React.FC<DigitalPassViewProps> = ({
 
         <button
           onClick={handleCopyShareLink}
-          className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/15 text-white font-medium text-sm border border-white/10 transition-all"
+          className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/15 text-white font-medium text-sm border border-white/10 transition-all cursor-pointer"
         >
           {copiedLink ? (
             <>
@@ -257,7 +256,7 @@ export const DigitalPassView: React.FC<DigitalPassViewProps> = ({
         <div className="text-center mt-8 no-print">
           <button
             onClick={onNewRegistration}
-            className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors"
+            className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors cursor-pointer"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>Register another participant or event</span>

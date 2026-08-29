@@ -43,7 +43,7 @@ export const PortalHeader: React.FC<PortalHeaderProps> = ({ currentTab, onSelect
         <div className="flex items-center gap-1 bg-[#0d1015] p-1 rounded-xl border border-white/10">
           <button
             onClick={() => onSelectTab('register')}
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
               currentTab === 'register'
                 ? 'bg-[#2563EB] text-white shadow-md'
                 : 'text-gray-400 hover:text-white hover:bg-white/5'
@@ -55,7 +55,7 @@ export const PortalHeader: React.FC<PortalHeaderProps> = ({ currentTab, onSelect
 
           <button
             onClick={() => onSelectTab('verify')}
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
               currentTab === 'verify'
                 ? 'bg-[#2563EB] text-white shadow-md'
                 : 'text-gray-400 hover:text-white hover:bg-white/5'
@@ -75,7 +75,7 @@ export const PortalHeader: React.FC<PortalHeaderProps> = ({ currentTab, onSelect
 
           <button
             onClick={handleReturnToMainSite}
-            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-gray-300 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg transition-colors"
+            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-gray-300 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg transition-colors cursor-pointer"
           >
             <span>Fest Website</span>
             <ExternalLink className="w-3 h-3 text-gray-400" />

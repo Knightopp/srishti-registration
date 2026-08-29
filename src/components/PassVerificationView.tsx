@@ -4,26 +4,21 @@ import {
   Search, 
   CheckCircle2, 
   XCircle, 
-  Calendar, 
   Building, 
-  User, 
-  Ticket, 
   Check, 
-  AlertTriangle, 
   Eye, 
   Clock 
 } from 'lucide-react';
 import { useRegistration } from '../context/RegistrationContext';
 import { RegistrationRecord } from '../types/registration';
 import { DigitalPassView } from './DigitalPassView';
-import { CustomSrishtiQR } from './CustomSrishtiQR';
 
 interface PassVerificationViewProps {
   initialPassId?: string;
 }
 
 export const PassVerificationView: React.FC<PassVerificationViewProps> = ({ initialPassId }) => {
-  const { registrations, getRegistrationByPassId, updateRegistrationStatus, syncWithCloud } = useRegistration();
+  const { getRegistrationByPassId, updateRegistrationStatus, syncWithCloud } = useRegistration();
   const [searchInput, setSearchInput] = useState(initialPassId || '');
   const [activeRecord, setActiveRecord] = useState<RegistrationRecord | null>(null);
   const [searched, setSearched] = useState(false);
@@ -94,7 +89,7 @@ export const PassVerificationView: React.FC<PassVerificationViewProps> = ({ init
           />
           <button
             type="submit"
-            className="absolute right-2 px-4 py-2 bg-gradient-to-r from-[#38BDF8] to-[#2563EB] text-white font-semibold text-xs rounded-xl shadow-md hover:scale-105 transition-all"
+            className="absolute right-2 px-4 py-2 bg-gradient-to-r from-[#38BDF8] to-[#2563EB] text-white font-semibold text-xs rounded-xl shadow-md hover:scale-105 transition-all cursor-pointer"
           >
             Verify
           </button>
@@ -127,7 +122,7 @@ export const PassVerificationView: React.FC<PassVerificationViewProps> = ({ init
                 <div className="flex items-center gap-2">
                   <button
                     onClick={handleToggleCheckIn}
-                    className={`px-4 py-2 rounded-xl text-xs font-bold font-mono transition-all flex items-center gap-2 ${
+                    className={`px-4 py-2 rounded-xl text-xs font-bold font-mono transition-all flex items-center gap-2 cursor-pointer ${
                       activeRecord.checkInStatus === 'Checked In'
                         ? 'bg-emerald-500 text-black shadow-lg shadow-emerald-500/20'
                         : 'bg-white/10 hover:bg-white/15 text-gray-300 border border-white/10'
@@ -181,7 +176,7 @@ export const PassVerificationView: React.FC<PassVerificationViewProps> = ({ init
               <div className="pt-4 border-t border-white/10 flex justify-end">
                 <button
                   onClick={() => setShowFullPassModal(true)}
-                  className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/10 hover:bg-white/15 text-white text-xs font-semibold border border-white/10 transition-colors"
+                  className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/10 hover:bg-white/15 text-white text-xs font-semibold border border-white/10 transition-colors cursor-pointer"
                 >
                   <Eye className="w-3.5 h-3.5" />
                   <span>View Full Digital Badge</span>
@@ -206,7 +201,7 @@ export const PassVerificationView: React.FC<PassVerificationViewProps> = ({ init
           <div className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto">
             <button
               onClick={() => setShowFullPassModal(false)}
-              className="absolute top-4 right-4 z-50 p-2 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors"
+              className="absolute top-4 right-4 z-50 p-2 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors cursor-pointer"
             >
               ✕
             </button>

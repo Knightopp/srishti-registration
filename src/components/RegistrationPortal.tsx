@@ -7,19 +7,11 @@ import {
   Mail, 
   Phone, 
   Building, 
-  GraduationCap, 
-  Users, 
-  CreditCard, 
-  QrCode, 
-  ArrowRight, 
-  CheckCircle2, 
-  ShieldCheck, 
-  Info, 
-  Lock 
+  ShieldCheck
 } from 'lucide-react';
 import QRCode from 'qrcode';
 import { useRegistration } from '../context/RegistrationContext';
-import { RegistrationRecord, EventItem } from '../types/registration';
+import { RegistrationRecord } from '../types/registration';
 import { DigitalPassView } from './DigitalPassView';
 
 interface RegistrationPortalProps {
@@ -192,7 +184,7 @@ export const RegistrationPortal: React.FC<RegistrationPortalProps> = ({ initialE
                     key={f}
                     type="button"
                     onClick={() => setActiveFilter(f)}
-                    className={`px-2.5 py-1 rounded-md text-[11px] font-semibold uppercase tracking-wider transition-all ${
+                    className={`px-2.5 py-1 rounded-md text-[11px] font-semibold uppercase tracking-wider transition-all cursor-pointer ${
                       activeFilter === f
                         ? 'bg-blue-600 text-white'
                         : 'text-gray-400 hover:text-white'
@@ -416,7 +408,7 @@ export const RegistrationPortal: React.FC<RegistrationPortalProps> = ({ initialE
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full py-3 px-6 rounded-xl bg-gradient-to-r from-[#38BDF8] via-[#2563EB] to-[#1D4ED8] text-white font-bold text-sm tracking-wide shadow-lg hover:shadow-cyan-500/25 hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center justify-center gap-2"
+                className="w-full py-3 px-6 rounded-xl bg-gradient-to-r from-[#38BDF8] via-[#2563EB] to-[#1D4ED8] text-white font-bold text-sm tracking-wide shadow-lg hover:shadow-cyan-500/25 hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center justify-center gap-2 cursor-pointer"
               >
                 {isSubmitting ? (
                   <span>Issuing Pass...</span>
