@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { RegistrationProvider, useRegistration } from './context/RegistrationContext';
+import { AtmosphericBackground } from './components/AtmosphericBackground';
 import { PortalHeader } from './components/PortalHeader';
 import { EventTypeModal } from './components/EventTypeModal';
 import { TeamEventsView } from './components/TeamEventsView';
@@ -125,8 +126,11 @@ export function AppContent() {
   };
 
   return (
-    <div className="min-h-screen bg-[#050608] text-[#E8E8EC] antialiased selection:bg-[#2563EB] selection:text-white flex flex-col justify-between">
+    <div className="relative min-h-screen bg-transparent text-[#E8E8EC] antialiased selection:bg-[#2563EB] selection:text-white flex flex-col justify-between overflow-x-hidden">
       
+      {/* Signature Atmospheric Background */}
+      <AtmosphericBackground />
+
       {/* Dual Box Popup Modal (Top & Bottom sliding boxes) */}
       <EventTypeModal
         isOpen={showModeModal && currentTab === 'register' && !generatedPass}
@@ -134,7 +138,7 @@ export function AppContent() {
         onSelectType={handleSelectMode}
       />
 
-      <div className="w-full">
+      <div className="relative z-10 w-full">
         {/* Short, compact header navbar */}
         <PortalHeader
           currentTab={currentTab}
