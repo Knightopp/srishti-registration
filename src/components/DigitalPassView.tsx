@@ -33,7 +33,7 @@ export const DigitalPassView: React.FC<DigitalPassViewProps> = ({
         particleCount: 70,
         spread: 60,
         origin: { y: 0.6 },
-        colors: ['#FFFFFF', '#94A3B8', '#10B981', '#38BDF8'],
+        colors: ['#FFFFFF', '#38BDF8', '#2563EB', '#60A5FA', '#1D4ED8'],
       });
     } catch {}
   }, []);
@@ -47,7 +47,7 @@ export const DigitalPassView: React.FC<DigitalPassViewProps> = ({
       const canvas = await html2canvas(passCardRef.current, {
         scale: 3,
         useCORS: true,
-        backgroundColor: '#090B0F',
+        backgroundColor: '#000000',
         logging: false,
       });
       const link = document.createElement('a');
@@ -76,15 +76,12 @@ export const DigitalPassView: React.FC<DigitalPassViewProps> = ({
       
       {/* Header */}
       <div className="text-center mb-8">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#171C26] border border-white/10 text-emerald-400 font-['Outfit'] text-xs font-bold mb-3 shadow-sm">
-          <ShieldCheck className="w-4 h-4 text-emerald-400" />
-          <span>OFFICIAL ACCESS PASS ISSUED</span>
-        </div>
         <h1 className="headline-display text-4xl sm:text-5xl text-white">
-          Access Granted.
+          Access Granted.<br />
+          <span className="text-[#38BDF8]">Pass Issued.</span>
         </h1>
         <p className="text-xs sm:text-sm text-white/50 mt-1 max-w-md mx-auto font-normal">
-          Present this verified badge at the registration gate for rapid campus entry.
+          Present this verified badge at the registration gate for fast-track campus entry.
         </p>
       </div>
 
@@ -93,7 +90,7 @@ export const DigitalPassView: React.FC<DigitalPassViewProps> = ({
         <button
           onClick={handleDownloadImage}
           disabled={isDownloading}
-          className="btn-mono-accent px-6 py-2.5 rounded-full font-['Outfit'] font-bold text-xs uppercase tracking-wider flex items-center gap-2"
+          className="btn-white-action px-6 py-2.5 rounded-full font-['Outfit'] font-bold text-xs uppercase tracking-wider flex items-center gap-2 shadow-2xl"
         >
           <Download className="w-4 h-4" />
           <span>{isDownloading ? 'Exporting...' : 'Download Pass (PNG)'}</span>
@@ -101,7 +98,7 @@ export const DigitalPassView: React.FC<DigitalPassViewProps> = ({
 
         <button
           onClick={handlePrint}
-          className="btn-mono-primary px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider flex items-center gap-2"
+          className="px-5 py-2.5 rounded-full bg-[#10131B] border border-white/15 text-white text-xs font-bold uppercase tracking-wider flex items-center gap-2 hover:bg-white hover:text-black transition-colors cursor-pointer"
         >
           <Printer className="w-4 h-4" />
           <span>Print</span>
@@ -109,12 +106,12 @@ export const DigitalPassView: React.FC<DigitalPassViewProps> = ({
 
         <button
           onClick={handleCopyShareLink}
-          className="mono-card-surface px-5 py-2.5 rounded-full text-xs font-['Outfit'] font-bold flex items-center gap-2 text-white/80 hover:text-white"
+          className="px-5 py-2.5 rounded-full bg-[#10131B] border border-white/15 text-white text-xs font-['Outfit'] font-bold flex items-center gap-2 hover:border-[#38BDF8] transition-colors cursor-pointer"
         >
           {copiedLink ? (
             <>
-              <Check className="w-4 h-4 text-emerald-400" />
-              <span className="text-emerald-400">Link Copied</span>
+              <Check className="w-4 h-4 text-[#38BDF8]" />
+              <span className="text-[#38BDF8]">Link Copied</span>
             </>
           ) : (
             <>
@@ -125,25 +122,25 @@ export const DigitalPassView: React.FC<DigitalPassViewProps> = ({
         </button>
       </div>
 
-      {/* Monochromatic Pass Card */}
+      {/* 70% Black Pass Card */}
       <div className="flex justify-center">
         <div
           ref={passCardRef}
           id="srishti-pass-card"
-          className="w-full max-w-xl mono-card-elevated p-6 sm:p-8 relative overflow-hidden text-white printable-pass-card shadow-2xl border border-white/15"
+          className="w-full max-w-xl game-canvas-black rounded-[32px] p-6 sm:p-8 relative overflow-hidden text-white printable-pass-card shadow-2xl border border-white/15"
         >
+          {/* Top Progress bar signature */}
+          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-600 via-[#38BDF8] to-white" />
+
           {/* Header Row */}
-          <div className="relative z-10 flex items-start justify-between border-b border-white/10 pb-5">
+          <div className="relative z-10 flex items-start justify-between border-b border-white/10 pb-5 pt-2">
             <div className="flex items-center gap-3.5">
-              <div className="w-12 h-12 rounded-2xl bg-[#090B0F] p-2 border border-white/15 flex items-center justify-center">
+              <div className="w-12 h-12 rounded-2xl bg-black p-2 border border-white/15 flex items-center justify-center">
                 <img src={srishtiLogo} alt="Srishti" className="w-full h-full object-contain" />
               </div>
               <div>
-                <span className="font-['Outfit'] text-[10px] uppercase tracking-widest text-emerald-400 block font-bold">
-                  SRISHTI 2.7 ACCESS BADGE
-                </span>
                 <h2 className="font-['Outfit'] font-black text-2xl text-white tracking-tight">
-                  SRISHTI <span className="text-white/50">2.7</span>
+                  srishti <span className="text-[#38BDF8]">2.7</span>
                 </h2>
                 <span className="font-['Outfit'] text-xs text-white/50">Dec 4–5, 2026 • St. Thomas College</span>
               </div>
@@ -151,7 +148,7 @@ export const DigitalPassView: React.FC<DigitalPassViewProps> = ({
 
             <div className="text-right">
               <span className="text-[10px] text-white/40 uppercase tracking-widest block font-['Outfit'] font-bold">PASS ID</span>
-              <span className="text-base sm:text-lg font-black text-white bg-[#090B0F] px-3.5 py-1 rounded-full border border-white/15 inline-block mt-0.5 font-['IBM_Plex_Mono']">
+              <span className="text-base sm:text-lg font-black text-white bg-black px-3.5 py-1 rounded-full border border-blue-400/30 inline-block mt-0.5 font-['IBM_Plex_Mono']">
                 {record.passId}
               </span>
             </div>
@@ -171,7 +168,7 @@ export const DigitalPassView: React.FC<DigitalPassViewProps> = ({
                     {record.fullName}
                   </p>
                   {record.teamName && (
-                    <span className="px-2.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 font-['Outfit'] text-xs font-bold border border-emerald-500/30">
+                    <span className="px-2.5 py-0.5 rounded-full bg-blue-500/20 text-[#93C5FD] font-['Outfit'] text-xs font-bold border border-blue-400/30">
                       Team {record.teamName}
                     </span>
                   )}
@@ -179,16 +176,16 @@ export const DigitalPassView: React.FC<DigitalPassViewProps> = ({
                 <p className="font-['Outfit'] text-xs text-white/50 mt-0.5">{record.email} • {record.phone}</p>
               </div>
 
-              {/* Team Roster if team pass */}
+              {/* Team Roster */}
               {record.teammates && record.teammates.length > 0 && (
-                <div className="p-4 rounded-2xl bg-[#090B0F] border border-white/10">
-                  <span className="font-['Outfit'] text-[11px] text-white/70 uppercase tracking-wider block mb-2 font-bold flex items-center gap-1.5">
+                <div className="p-4 rounded-2xl bg-black border border-white/10">
+                  <span className="font-['Outfit'] text-[11px] text-[#93C5FD] uppercase tracking-wider block mb-2 font-bold flex items-center gap-1.5">
                     <Users className="w-3.5 h-3.5 text-[#38BDF8]" />
                     <span>TEAM ROSTER ({record.teammates.length + 1} MEMBERS)</span>
                   </span>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-['Outfit']">
                     <div className="flex items-center gap-2 text-white font-semibold">
-                      <span className="w-5 h-5 rounded-full bg-white/20 text-white flex items-center justify-center text-[10px] font-bold">1</span>
+                      <span className="w-5 h-5 rounded-full bg-blue-600 text-white flex items-center justify-center text-[10px] font-bold">1</span>
                       <span className="truncate">{record.fullName} <span className="text-white/40 text-[10px] font-normal">(Lead)</span></span>
                     </div>
                     {record.teammates.map((tm, idx) => (
@@ -232,7 +229,7 @@ export const DigitalPassView: React.FC<DigitalPassViewProps> = ({
                   {record.selectedEventNames.map((name, idx) => (
                     <span 
                       key={idx} 
-                      className="px-3 py-1 rounded-full bg-[#090B0F] border border-white/10 text-xs font-semibold text-white/80 font-['Outfit']"
+                      className="px-3 py-1 rounded-full bg-black border border-white/15 text-xs font-semibold text-white font-['Outfit']"
                     >
                       {name}
                     </span>
@@ -242,12 +239,9 @@ export const DigitalPassView: React.FC<DigitalPassViewProps> = ({
             </div>
 
             {/* Right Col: QR Code */}
-            <div className="flex flex-col items-center justify-center p-4 rounded-2xl bg-[#090B0F] border border-white/10">
+            <div className="flex flex-col items-center justify-center p-4 rounded-2xl bg-black border border-white/10">
               <CustomSrishtiQR value={verificationUrl} size={135} />
               <div className="mt-3 text-center font-['Outfit']">
-                <span className="text-[10px] text-emerald-400 uppercase font-bold tracking-wider flex items-center justify-center gap-1">
-                  <ShieldCheck className="w-3.5 h-3.5" /> VERIFIED BADGE
-                </span>
                 <span className="text-[9px] text-white/40 block truncate max-w-[125px] mt-0.5 font-['IBM_Plex_Mono']">
                   {record.securityHash}
                 </span>
