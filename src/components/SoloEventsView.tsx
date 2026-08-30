@@ -4,9 +4,9 @@ import {
   Trophy, 
   Calendar, 
   MapPin, 
-  ArrowUpRight, 
   Search, 
-  Layers
+  Layers,
+  ArrowUpRight
 } from 'lucide-react';
 import { useRegistration } from '../context/RegistrationContext';
 import { EventItem } from '../types/registration';
@@ -27,7 +27,6 @@ export const SoloEventsView: React.FC<SoloEventsViewProps> = ({
   const [selectedCategory, setSelectedCategory] = useState('ALL');
 
   const soloEvents = events.filter((e) => e.eventType === 'solo');
-
   const categories = ['ALL', 'CODING', 'DEBUGGING', 'WEB DEV', 'SCREENLESS'];
 
   const filteredEvents = soloEvents.filter((ev) => {
@@ -46,201 +45,218 @@ export const SoloEventsView: React.FC<SoloEventsViewProps> = ({
     return true;
   });
 
+  const featuredEvent = soloEvents[0];
+
   return (
-    <div className="w-full max-w-6xl mx-auto px-4 py-4 sm:py-6">
+    <div className="w-full max-w-4xl mx-auto px-4 py-4 sm:py-6">
       
-      {/* Top Banner & Mode Switcher Bar */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 pb-6 border-b border-white/[0.08]">
-        <div>
-          <div className="flex items-center gap-2 mb-2">
-            <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#0B1530] border border-blue-500/30 text-[#93C5FD] text-xs font-['Outfit'] font-semibold">
-              <span className="w-2 h-2 rounded-full bg-[#38BDF8] shadow-[0_0_8px_#38BDF8]" />
-              <span className="tracking-wider uppercase text-[11px]">SOLO CHALLENGES</span>
-            </span>
-            <span className="text-white/40 text-xs font-['Outfit']">
-              {soloEvents.length} Arenas
-            </span>
-          </div>
-
-          <h1 className="headline-display text-3xl sm:text-4xl text-white">
-            Solo & Individual<br />
-            <span className="text-[#38BDF8]">Challenges.</span>
-          </h1>
-          <p className="text-xs sm:text-sm text-white/60 mt-1.5 font-normal max-w-xl">
-            Test your algorithmic prowess, prompt engineering, and debugging speed.
-          </p>
-        </div>
-
-        {/* Mode Switcher Pill */}
-        <div className="flex items-center gap-3 self-start md:self-end">
-          <div className="frosted-pill-bar p-1 flex items-center gap-1">
-            <button
-              className="px-4 py-1.5 rounded-full btn-fluid-blue text-white text-xs font-['Outfit'] font-bold shadow-md cursor-default"
-            >
-              Solo Events
-            </button>
-            <button
-              onClick={onSwitchToTeam}
-              className="px-4 py-1.5 rounded-full text-xs font-['Outfit'] font-bold text-white/60 hover:text-white transition-colors cursor-pointer"
-            >
-              Team Events
-            </button>
-          </div>
-
-          <button
-            onClick={onOpenModeModal}
-            title="Change event type"
-            className="p-2.5 rounded-full bg-white/[0.08] hover:bg-white/[0.14] border border-white/12 text-white/70 hover:text-white transition-colors cursor-pointer"
-          >
-            <Layers className="w-4 h-4" />
-          </button>
-        </div>
-      </div>
-
-      {/* Filter & Search Toolbar */}
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-8">
-        {/* Search */}
-        <div className="relative w-full sm:w-80">
-          <Search className="w-4 h-4 text-white/40 absolute left-4 top-1/2 -translate-y-1/2" />
-          <input
-            type="text"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search solo events..."
-            className="w-full bg-[#081126]/80 border border-white/15 rounded-full pl-11 pr-4 py-2.5 text-xs text-white placeholder:text-white/40 focus:outline-none focus:border-[#38BDF8] font-['Outfit'] transition-colors"
-          />
-        </div>
-
-        {/* Category Pills */}
-        <div className="flex items-center gap-1.5 overflow-x-auto w-full sm:w-auto pb-1 sm:pb-0 scrollbar-none">
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setSelectedCategory(cat)}
-              className={`px-4 py-1.5 rounded-full text-[11px] font-['Outfit'] font-bold uppercase tracking-wider whitespace-nowrap transition-all cursor-pointer ${
-                selectedCategory === cat
-                  ? 'btn-fluid-blue text-white shadow-md'
-                  : 'bg-[#0B1530]/70 text-white/60 hover:text-white border border-white/10'
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Solo Events Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredEvents.map((ev) => (
-          <div
-            key={ev.id}
-            className="dark-blue-glass group relative flex flex-col justify-between rounded-[32px] overflow-hidden transition-all duration-300 hover:scale-[1.015] hover:border-[#38BDF8]/60 hover:shadow-2xl"
-          >
-            {/* Media Banner */}
-            <div className="relative h-44 w-full overflow-hidden bg-black/50">
-              <img
-                src={ev.image}
-                alt={ev.title}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-75 group-hover:opacity-95"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#09142E] via-transparent to-black/40" />
-
-              {/* Badges on Banner */}
-              <div className="absolute top-3.5 left-3.5 right-3.5 flex items-center justify-between gap-2">
-                <span className="px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-[10px] font-['Outfit'] font-bold text-[#60A5FA] uppercase tracking-wider">
-                  {ev.stageLabel}
-                </span>
-
-                <span className="px-3 py-1 rounded-full bg-blue-500/25 backdrop-blur-md border border-blue-400/40 text-[#93C5FD] text-[10px] font-['Outfit'] font-bold flex items-center gap-1 shadow-sm">
-                  <User className="w-3 h-3 text-[#38BDF8]" />
-                  <span>1 Participant</span>
-                </span>
-              </div>
-
-              {/* Prize Pool Pill */}
-              <div className="absolute bottom-3.5 left-3.5 flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/20 backdrop-blur-md border border-amber-400/40 text-amber-200 text-xs font-bold font-['Outfit']">
-                <Trophy className="w-3.5 h-3.5 text-amber-300" />
-                <span>{ev.prize}</span>
-              </div>
+      {/* Monochromatic Canvas Container */}
+      <div className="mono-canvas rounded-[36px] p-6 sm:p-8 shadow-2xl space-y-7">
+        
+        {/* Top Header */}
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-4 border-b border-white/[0.08]">
+          <div>
+            <div className="flex items-center gap-2 mb-1.5">
+              <span className="text-[11px] font-['Outfit'] font-bold text-white/50 uppercase tracking-widest">
+                SRISHTI 2.7 • INDIVIDUAL ARENAS
+              </span>
+              <span className="w-1.5 h-1.5 rounded-full bg-[#38BDF8]" />
+              <span className="text-white/40 text-xs font-['Outfit']">
+                {soloEvents.length} Challenges
+              </span>
             </div>
 
-            {/* Content Body */}
-            <div className="p-6 flex-1 flex flex-col justify-between">
-              <div>
-                <h3 className="font-['Outfit'] font-black text-xl text-white group-hover:text-[#60A5FA] transition-colors line-clamp-1">
-                  {ev.title}
-                </h3>
+            <h1 className="headline-display text-3xl sm:text-4xl text-white tracking-tight">
+              Solo Events
+            </h1>
+          </div>
 
-                <p className="text-xs text-white/65 mt-2 line-clamp-2 font-normal leading-relaxed">
-                  {ev.description}
-                </p>
+          {/* Mode Switcher Capsule */}
+          <div className="flex items-center gap-2">
+            <div className="p-1 flex items-center gap-1 bg-[#0A0D13] border border-white/10 rounded-full">
+              <button
+                className="px-3.5 py-1.5 rounded-full mono-active-tab text-xs font-['Outfit'] font-bold cursor-default"
+              >
+                Solo
+              </button>
+              <button
+                onClick={onSwitchToTeam}
+                className="px-3.5 py-1.5 rounded-full text-xs font-['Outfit'] font-bold text-white/50 hover:text-white transition-colors cursor-pointer"
+              >
+                Team
+              </button>
+            </div>
 
-                {/* Metadata */}
-                <div className="grid grid-cols-2 gap-2 mt-4 text-[11px] font-['Outfit'] font-medium text-white/55">
-                  <div className="flex items-center gap-1.5 truncate">
-                    <Calendar className="w-3.5 h-3.5 text-[#38BDF8] shrink-0" />
-                    <span className="truncate">{ev.time.split('•')[0]}</span>
-                  </div>
-                  <div className="flex items-center gap-1.5 truncate">
-                    <MapPin className="w-3.5 h-3.5 text-[#38BDF8] shrink-0" />
-                    <span className="truncate">{ev.venue}</span>
-                  </div>
+            <button
+              onClick={onOpenModeModal}
+              title="Change event type"
+              className="mono-icon-btn w-9 h-9"
+            >
+              <Layers className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+
+        {/* FEATURED HERO CARD */}
+        {featuredEvent && (
+          <div>
+            <div className="flex items-center justify-between mb-3">
+              <span className="text-xs font-['Outfit'] font-bold text-white/70 uppercase tracking-wider">
+                Featured Arena
+              </span>
+              <span className="text-[11px] text-[#38BDF8] font-['Outfit'] font-semibold flex items-center gap-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#38BDF8]" />
+                Solo Challenge
+              </span>
+            </div>
+
+            <div
+              onClick={() => onSelectEvent(featuredEvent)}
+              className="mono-card-elevated cursor-pointer group relative overflow-hidden"
+            >
+              <div className="relative h-48 sm:h-52 w-full overflow-hidden bg-[#10141D] p-6 flex flex-col justify-between">
+                <img
+                  src={featuredEvent.image}
+                  alt={featuredEvent.title}
+                  className="absolute inset-0 w-full h-full object-cover opacity-35 group-hover:scale-105 transition-all duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#151A25] via-transparent to-black/40" />
+
+                {/* Badges */}
+                <div className="relative z-10 flex items-center justify-between">
+                  <span className="px-3 py-1 rounded-full bg-[#0A0D13]/80 border border-white/15 text-[10px] font-['Outfit'] font-bold text-white uppercase tracking-wider">
+                    {featuredEvent.stageLabel}
+                  </span>
+                  <span className="px-3 py-1 rounded-full bg-[#0A0D13]/80 border border-white/15 text-[10px] font-['Outfit'] font-bold text-white flex items-center gap-1.5">
+                    <User className="w-3 h-3 text-[#38BDF8]" />
+                    <span>1 Participant</span>
+                  </span>
                 </div>
 
-                {/* Tags */}
-                <div className="flex flex-wrap gap-1 mt-3.5">
-                  {ev.tags.slice(0, 3).map((tag, i) => (
-                    <span
-                      key={i}
-                      className="px-2.5 py-0.5 rounded-full bg-white/[0.06] border border-white/10 text-[10px] font-['Outfit'] text-white/50"
-                    >
-                      {tag}
-                    </span>
-                  ))}
+                {/* Title */}
+                <div className="relative z-10">
+                  <h3 className="font-['Outfit'] font-black text-2xl sm:text-3xl text-white tracking-tight">
+                    {featuredEvent.title}
+                  </h3>
+                  <p className="text-xs text-white/70 mt-1 max-w-lg line-clamp-1">
+                    {featuredEvent.highlightText || featuredEvent.description}
+                  </p>
                 </div>
               </div>
 
-              {/* Action Row */}
-              <div className="mt-6 pt-4 border-t border-white/10 flex items-center justify-between gap-3">
+              {/* Shelf */}
+              <div className="mono-card-shelf px-6 py-4 flex items-center justify-between">
                 <div>
-                  <span className="text-[10px] font-['Outfit'] text-white/40 uppercase tracking-widest block font-bold">
-                    ENTRY FEE
+                  <span className="font-['Outfit'] font-extrabold text-sm text-white block">
+                    {featuredEvent.title}
                   </span>
-                  <span className="font-['Outfit'] font-black text-lg text-white">
-                    {ev.fee === 0 ? 'FREE' : `₹${ev.fee}`}
+                  <span className="text-[11px] font-['Outfit'] text-white/50 uppercase font-semibold">
+                    {featuredEvent.category} • ₹{featuredEvent.fee} ENTRY • PRIZE: {featuredEvent.prize}
                   </span>
                 </div>
 
                 <button
-                  onClick={() => onSelectEvent(ev)}
-                  className="btn-fluid-blue px-4 py-2 rounded-full font-['Outfit'] font-bold text-xs uppercase tracking-wider flex items-center gap-1.5 cursor-pointer"
+                  type="button"
+                  className="btn-mono-primary px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider flex items-center gap-1.5"
                 >
-                  <span>Register Solo</span>
+                  <span>Register</span>
                   <ArrowUpRight className="w-3.5 h-3.5" />
                 </button>
               </div>
             </div>
           </div>
-        ))}
-      </div>
+        )}
 
-      {filteredEvents.length === 0 && (
-        <div className="text-center py-16 dark-blue-glass rounded-3xl p-8">
-          <p className="text-white/50 text-sm font-['Outfit']">
-            No solo events found matching your search.
-          </p>
-          <button
-            onClick={() => {
-              setSearchQuery('');
-              setSelectedCategory('ALL');
-            }}
-            className="mt-3 text-xs text-[#38BDF8] font-bold underline cursor-pointer"
-          >
-            Clear Filters
-          </button>
+        {/* ALL SOLO ARENAS LIST */}
+        <div>
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+            <span className="text-xs font-['Outfit'] font-bold text-white/70 uppercase tracking-wider">
+              All Solo Arenas ({filteredEvents.length})
+            </span>
+
+            {/* Search */}
+            <div className="relative w-full sm:w-64">
+              <Search className="w-3.5 h-3.5 text-white/40 absolute left-3.5 top-1/2 -translate-y-1/2" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search arenas..."
+                className="w-full mono-input-inset rounded-full pl-9 pr-3.5 py-1.5 text-xs text-white placeholder:text-white/40 font-['Outfit']"
+              />
+            </div>
+          </div>
+
+          {/* Category Filter Pills */}
+          <div className="flex items-center gap-1.5 overflow-x-auto pb-2 mb-4 scrollbar-none">
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setSelectedCategory(cat)}
+                className={`px-3 py-1 rounded-full text-[11px] font-['Outfit'] font-bold uppercase tracking-wider whitespace-nowrap transition-all cursor-pointer ${
+                  selectedCategory === cat
+                    ? 'mono-active-tab'
+                    : 'bg-[#151922] text-white/50 hover:text-white border border-white/[0.06]'
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+
+          {/* List Item Rows */}
+          <div className="space-y-2.5">
+            {filteredEvents.map((ev) => (
+              <div
+                key={ev.id}
+                onClick={() => onSelectEvent(ev)}
+                className="mono-card-surface p-3.5 sm:p-4 flex items-center justify-between gap-4 cursor-pointer group"
+              >
+                {/* Thumbnail */}
+                <div className="flex items-center gap-3.5 min-w-0">
+                  <div className="relative w-12 h-12 rounded-xl overflow-hidden bg-[#0A0D13] shrink-0 border border-white/10">
+                    <img
+                      src={ev.image}
+                      alt={ev.title}
+                      className="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform"
+                    />
+                  </div>
+
+                  {/* Title & Subtitle */}
+                  <div className="min-w-0">
+                    <h3 className="font-['Outfit'] font-extrabold text-sm sm:text-base text-white group-hover:text-[#38BDF8] transition-colors truncate">
+                      {ev.title}
+                    </h3>
+                    <p className="font-['Outfit'] text-xs text-white/45 truncate mt-0.5">
+                      {ev.category} • 1 Attendee • Prize: {ev.prize}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Right: Fee Pill & Action */}
+                <div className="flex items-center gap-2.5 shrink-0">
+                  <span className="px-3 py-1 rounded-full bg-[#0A0D13] text-white/90 font-['Outfit'] font-bold text-xs border border-white/10">
+                    {ev.fee === 0 ? 'FREE' : `₹${ev.fee}`}
+                  </span>
+
+                  <div className="mono-icon-btn w-8 h-8 group-hover:bg-[#2A3346]">
+                    <ArrowUpRight className="w-3.5 h-3.5 text-white/70" />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {filteredEvents.length === 0 && (
+            <div className="text-center py-12 mono-card-surface p-6">
+              <p className="text-white/50 text-xs font-['Outfit']">
+                No solo events match your search.
+              </p>
+            </div>
+          )}
         </div>
-      )}
 
+      </div>
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, Compass, ShieldCheck } from 'lucide-react';
 import srishtiLogo from '../assets/images/srishti-logo.png';
 import { useRegistration } from '../context/RegistrationContext';
 
@@ -24,52 +24,56 @@ export const PortalHeader: React.FC<PortalHeaderProps> = ({
 
   return (
     <header className="sticky top-4 z-50 w-full px-4 flex justify-center pointer-events-none mb-6">
-      {/* Frosted Dark Blue Floating Capsule */}
-      <div className="frosted-pill-bar pointer-events-auto px-3.5 sm:px-5 py-2 flex items-center justify-between gap-3 sm:gap-6 max-w-lg w-auto shadow-2xl">
+      {/* Monochromatic Matte Capsule Navigation Bar */}
+      <div className="mono-capsule-bar pointer-events-auto px-3.5 sm:px-4 py-2 flex items-center justify-between gap-3 sm:gap-6 max-w-xl w-full shadow-xl">
         
-        {/* Brand Identity: Logo + srishti 2.7 */}
+        {/* Brand: Logo + Srishti 2.7 */}
         <div 
           className="flex items-center gap-2.5 cursor-pointer select-none group" 
           onClick={() => onSelectTab('register')}
           title="Srishti 2.7 Portal"
         >
-          <div className="w-7 h-7 rounded-xl p-1 bg-white/10 border border-white/15 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+          <div className="w-7 h-7 rounded-xl p-1 bg-[#1C212E] border border-white/10 flex items-center justify-center shrink-0 group-hover:border-white/25 transition-colors">
             <img src={srishtiLogo} alt="Srishti" className="w-full h-full object-contain" />
           </div>
-          <span className="font-['Outfit'] font-black text-sm sm:text-base tracking-tight text-white whitespace-nowrap">
-            srishti<span className="text-[#38BDF8] ml-1 font-['Outfit'] font-semibold">2.7</span>
-          </span>
+          <div>
+            <span className="font-['Outfit'] font-extrabold text-sm sm:text-base tracking-tight text-white block leading-none">
+              Srishti <span className="text-white/50 font-normal">2.7</span>
+            </span>
+          </div>
         </div>
 
-        {/* Navigation Tabs (Frosted Capsule Style) */}
-        <nav className="flex items-center gap-1 bg-black/40 p-1 rounded-full border border-white/10 text-xs font-['Outfit'] font-bold">
+        {/* Center Mode Switcher Tabs */}
+        <nav className="flex items-center gap-1 p-1 rounded-full bg-[#0B0E14] border border-white/10 text-xs font-['Outfit'] font-semibold">
           <button
             onClick={() => onSelectTab('register')}
-            className={`px-3 py-1 rounded-full transition-all cursor-pointer whitespace-nowrap ${
+            className={`px-3.5 py-1.5 rounded-full transition-all cursor-pointer flex items-center gap-1.5 ${
               currentTab === 'register' 
-                ? 'btn-fluid-blue text-white shadow-md' 
-                : 'text-white/60 hover:text-white'
+                ? 'mono-active-tab' 
+                : 'text-white/50 hover:text-white'
             }`}
           >
-            Passes
+            <Compass className="w-3.5 h-3.5" />
+            <span>Passes</span>
           </button>
 
           <button
             onClick={() => onSelectTab('verify')}
-            className={`px-3 py-1 rounded-full transition-all cursor-pointer whitespace-nowrap ${
+            className={`px-3.5 py-1.5 rounded-full transition-all cursor-pointer flex items-center gap-1.5 ${
               currentTab === 'verify' 
-                ? 'btn-fluid-blue text-white shadow-md' 
-                : 'text-white/60 hover:text-white'
+                ? 'mono-active-tab' 
+                : 'text-white/50 hover:text-white'
             }`}
           >
-            Verify
+            <ShieldCheck className="w-3.5 h-3.5" />
+            <span>Verify</span>
           </button>
         </nav>
 
         {/* Fest Website Button */}
         <button
           onClick={handleReturnToMainSite}
-          className="btn-glass-white px-3.5 py-1.5 rounded-full text-[11px] sm:text-xs uppercase tracking-wider flex items-center gap-1.5 cursor-pointer leading-none whitespace-nowrap"
+          className="btn-mono-primary px-3.5 py-1.5 rounded-full text-xs font-bold flex items-center gap-1.5 leading-none shrink-0"
         >
           <span>Fest Site</span>
           <ArrowUpRight className="w-3.5 h-3.5" />

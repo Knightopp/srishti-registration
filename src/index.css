@@ -2,45 +2,52 @@
 
 @layer base {
   :root {
-    --font-heading: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+    --font-heading: 'Outfit', 'Plus Jakarta Sans', -apple-system, sans-serif;
     --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
     --font-mono: 'IBM Plex Mono', monospace;
 
-    /* Deep Midnight Obsidian & Dark Blue Palette */
-    --bg-midnight: #030611;
-    --surface-glass-0: rgba(6, 11, 25, 0.7);
-    --surface-glass-1: rgba(11, 19, 42, 0.75);
-    --surface-glass-2: rgba(16, 28, 60, 0.8);
-    --surface-card: rgba(13, 22, 48, 0.85);
+    /* Monochromatic Matte Slate / Obsidian Hierarchy */
+    --canvas-bg: #090B0F;
+    --surface-0: #0F1219;
+    --surface-1: #151922;
+    --surface-2: #1B202C;
+    --surface-3: #232938;
+    --surface-inset: #0A0C11;
 
-    --blue-glow: #2563EB;
-    --blue-electric: #38BDF8;
-    --blue-deep: #1D4ED8;
-    --blue-cobalt: #1E40AF;
-    --blue-highlight: #60A5FA;
+    /* Crisp Precision Micro-Accents */
+    --accent-emerald: #10B981;
+    --accent-mint: #34D399;
+    --accent-cyan: #06B6D4;
+    --accent-amber: #F59E0B;
+    --accent-blue: #3B82F6;
 
     --text-primary: #FFFFFF;
-    --text-secondary: #E2E8F0;
-    --text-muted: #94A3B8;
+    --text-secondary: #CBD5E1;
+    --text-muted: #64748B;
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --border-highlight: rgba(255, 255, 255, 0.16);
   }
 
   html {
     font-family: var(--font-body);
-    background-color: #030611;
+    background-color: #090B0F;
     color: #FFFFFF;
     -webkit-font-smoothing: antialiased;
   }
 
   body {
-    background-color: #030611 !important;
+    background-color: #090B0F !important;
     color: #FFFFFF !important;
     min-height: 100vh;
     overflow-x: hidden;
+    background-image: 
+      radial-gradient(ellipse 60% 40% at 50% -10%, rgba(30, 41, 59, 0.35), transparent 70%),
+      radial-gradient(ellipse 50% 30% at 100% 100%, rgba(15, 23, 42, 0.3), transparent 70%);
     background-attachment: fixed;
   }
 }
 
-/* Typography styles matching reference design */
+/* Typography styles matching Monochromatic Linear/Pro design */
 .font-display {
   font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif;
 }
@@ -52,100 +59,137 @@
   line-height: 1.08;
 }
 
-/* Dark Blue Fluid Glass Cards (Inspired by Music / Fluid App Reference in Dark Blue) */
-.dark-blue-glass {
-  background: linear-gradient(135deg, rgba(14, 24, 52, 0.8) 0%, rgba(7, 13, 30, 0.88) 100%);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.85), inset 0 1px 0 rgba(255, 255, 255, 0.16);
+/* Monochromatic Matte Slate Canvas & Panels */
+.mono-canvas {
+  background: #11141D;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  box-shadow: 
+    0 25px 60px -15px rgba(0, 0, 0, 0.8),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
 }
 
-.dark-blue-glass-elevated {
-  background: linear-gradient(135deg, rgba(18, 32, 68, 0.82) 0%, rgba(9, 17, 40, 0.9) 100%);
-  backdrop-filter: blur(28px);
-  -webkit-backdrop-filter: blur(28px);
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  box-shadow: 0 25px 60px -12px rgba(0, 0, 0, 0.9), inset 0 1px 0 rgba(255, 255, 255, 0.22);
+.mono-card-surface {
+  background: #171B26;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 
+    0 10px 30px -5px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
 }
-
-.dark-blue-glass-glow {
-  background: linear-gradient(135deg, rgba(22, 38, 80, 0.85) 0%, rgba(11, 20, 46, 0.92) 100%);
-  backdrop-filter: blur(32px);
-  -webkit-backdrop-filter: blur(32px);
-  border: 1px solid rgba(96, 165, 250, 0.3);
-  box-shadow: 0 25px 60px -10px rgba(37, 99, 235, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.25);
-}
-
-/* Frosted Capsule Navbar & Filter Bars */
-.frosted-pill-bar {
-  background: rgba(8, 15, 34, 0.72);
-  backdrop-filter: blur(28px);
-  -webkit-backdrop-filter: blur(28px);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.12);
-  border-radius: 9999px;
-}
-
-.frosted-pill-chip {
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 9999px;
-}
-
-/* Fluid Blue Buttons */
-.btn-fluid-blue {
-  background: linear-gradient(135deg, #38BDF8 0%, #2563EB 55%, #1D4ED8 100%);
-  color: #FFFFFF;
-  box-shadow: 0 10px 28px -4px rgba(37, 99, 235, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.3);
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.btn-fluid-blue:hover {
-  background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 50%, #2563EB 100%);
-  box-shadow: 0 14px 34px -2px rgba(37, 99, 235, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+.mono-card-surface:hover {
+  background: #1D2230;
+  border-color: rgba(255, 255, 255, 0.18);
   transform: translateY(-1px);
+  box-shadow: 
+    0 18px 40px -8px rgba(0, 0, 0, 0.65),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
 }
 
-.btn-glass-white {
+.mono-card-elevated {
+  background: linear-gradient(180deg, #1C2230 0%, #151A25 100%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 
+    0 16px 35px -8px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.16);
+  border-radius: 28px;
+}
+
+.mono-card-shelf {
+  background: #111520;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Monochromatic Capsule Navbar & Filters */
+.mono-capsule-bar {
+  background: rgba(18, 22, 31, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  border-radius: 9999px;
+}
+
+.mono-active-tab {
+  background: #283042;
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* Monochromatic Buttons */
+.btn-mono-primary {
   background: #FFFFFF;
-  color: #030611;
-  box-shadow: 0 8px 24px -4px rgba(255, 255, 255, 0.3);
+  color: #0A0C10;
   font-family: 'Outfit', sans-serif;
   font-weight: 700;
-  transition: all 0.2s ease;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 6px 20px -2px rgba(255, 255, 255, 0.25);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
 }
-.btn-glass-white:hover {
+.btn-mono-primary:hover {
   background: #F1F5F9;
   transform: translateY(-1px);
-  box-shadow: 0 12px 28px -2px rgba(255, 255, 255, 0.4);
+  box-shadow: 0 10px 25px -2px rgba(255, 255, 255, 0.4);
 }
 
-.icon-glass-circle {
-  width: 44px;
-  height: 44px;
+.btn-mono-accent {
+  background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+  color: #FFFFFF;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  border: 1px solid rgba(52, 211, 153, 0.4);
+  box-shadow: 0 6px 20px -2px rgba(16, 185, 129, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+.btn-mono-accent:hover {
+  background: linear-gradient(135deg, #34D399 0%, #10B981 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 25px -2px rgba(16, 185, 129, 0.6);
+}
+
+.mono-icon-btn {
+  width: 40px;
+  height: 40px;
   border-radius: 9999px;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: #1C212E;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   color: #FFFFFF;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+.mono-icon-btn:hover {
+  background: #262D3E;
+  border-color: rgba(255, 255, 255, 0.22);
+  transform: scale(1.05);
+}
+
+/* Monochromatic Inset Inputs */
+.mono-input-inset {
+  background: #0A0D13;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.5);
+  color: #FFFFFF;
   transition: all 0.2s ease;
 }
-.icon-glass-circle:hover {
-  background: rgba(255, 255, 255, 0.18);
-  transform: scale(1.05);
+.mono-input-inset:focus {
+  border-color: #38BDF8;
+  box-shadow: 
+    0 0 0 1px #38BDF8, 
+    inset 0 2px 5px rgba(0, 0, 0, 0.5);
 }
 
 /* Slide Animations */
 @keyframes slideDownIn {
   0% {
     opacity: 0;
-    transform: translateY(-60px) scale(0.96);
+    transform: translateY(-40px) scale(0.97);
   }
   100% {
     opacity: 1;
@@ -156,7 +200,7 @@
 @keyframes slideUpIn {
   0% {
     opacity: 0;
-    transform: translateY(60px) scale(0.96);
+    transform: translateY(40px) scale(0.97);
   }
   100% {
     opacity: 1;
@@ -165,11 +209,11 @@
 }
 
 .animate-slide-down-in {
-  animation: slideDownIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: slideDownIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .animate-slide-up-in {
-  animation: slideUpIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: slideUpIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 /* Custom Scrollbar */
@@ -178,14 +222,14 @@
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #030611;
+  background: #090B0F;
 }
 ::-webkit-scrollbar-thumb {
-  background: #172554;
+  background: #1E2432;
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #2563EB;
+  background: #333C52;
 }
 
 /* Print Styles */

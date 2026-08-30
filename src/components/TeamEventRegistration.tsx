@@ -12,8 +12,7 @@ import {
   AlertCircle,
   Trophy,
   Calendar,
-  MapPin,
-  ArrowUpRight
+  MapPin
 } from 'lucide-react';
 import QRCode from 'qrcode';
 import { EventItem, RegistrationRecord, TeammateInfo } from '../types/registration';
@@ -74,7 +73,7 @@ export const TeamEventRegistration: React.FC<TeamEventRegistrationProps> = ({
       QRCode.toDataURL(upiString, {
         width: 180,
         margin: 1,
-        color: { dark: '#040611', light: '#FFFFFF' },
+        color: { dark: '#090B0F', light: '#FFFFFF' },
       }).then(setUpiQrUrl).catch(() => {});
     } else {
       setUpiQrUrl('');
@@ -180,431 +179,405 @@ export const TeamEventRegistration: React.FC<TeamEventRegistrationProps> = ({
   return (
     <div className="w-full max-w-4xl mx-auto px-4 py-4 sm:py-6">
       
-      {/* Back Button */}
-      <button
-        onClick={onBack}
-        className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.08] hover:bg-white/[0.14] border border-white/12 text-white/80 hover:text-white text-xs font-['Outfit'] font-bold uppercase tracking-wider mb-6 transition-all cursor-pointer"
-      >
-        <ArrowLeft className="w-4 h-4" />
-        <span>Back to Team Events</span>
-      </button>
+      {/* Monochromatic Canvas Container */}
+      <div className="mono-canvas rounded-[36px] p-6 sm:p-8 shadow-2xl space-y-6">
+        
+        {/* Top Navigation Bar */}
+        <div className="flex items-center justify-between pb-4 border-b border-white/[0.08]">
+          <button
+            onClick={onBack}
+            className="mono-icon-btn w-auto px-4 py-2 flex items-center gap-2 text-xs font-['Outfit'] font-bold uppercase tracking-wider"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            <span>Squad Events</span>
+          </button>
 
-      {/* Event Hero Showcase Banner with Dark Blue Glass */}
-      <div className="dark-blue-glass-glow rounded-[32px] p-6 sm:p-8 mb-8 relative overflow-hidden shadow-2xl">
-        <div className="absolute top-0 right-0 w-80 h-80 bg-[#38BDF8]/20 rounded-full blur-3xl pointer-events-none" />
+          <span className="text-xs font-['Outfit'] text-white/50 font-semibold">
+            Registration Desk
+          </span>
+        </div>
 
-        <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
-          <div className="flex-1">
-            <div className="flex flex-wrap items-center gap-2 mb-2.5">
-              <span className="px-3 py-1 rounded-full bg-black/60 border border-white/20 text-[#60A5FA] text-xs font-['Outfit'] font-bold uppercase tracking-wider">
+        {/* Hero Card Banner */}
+        <div className="mono-card-elevated overflow-hidden">
+          <div className="relative h-44 sm:h-48 w-full overflow-hidden bg-[#10141D] p-6 flex flex-col justify-between">
+            <img
+              src={event.image}
+              alt={event.title}
+              className="absolute inset-0 w-full h-full object-cover opacity-35"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#151A25] via-transparent to-black/40" />
+
+            <div className="relative z-10 flex items-center justify-between">
+              <span className="px-3 py-1 rounded-full bg-[#0A0D13]/80 border border-white/15 text-[10px] font-['Outfit'] font-bold text-white uppercase tracking-wider">
                 {event.stageLabel}
               </span>
-              <span className="px-3 py-1 rounded-full bg-blue-500/25 border border-blue-400/40 text-[#93C5FD] text-xs font-['Outfit'] font-bold flex items-center gap-1.5 shadow-sm">
+              <span className="px-3 py-1 rounded-full bg-[#0A0D13]/80 border border-white/15 text-[10px] font-['Outfit'] font-bold text-white flex items-center gap-1.5">
                 <Users className="w-3.5 h-3.5 text-[#38BDF8]" />
                 <span>{event.teamSize}</span>
               </span>
             </div>
 
-            <h1 className="headline-display text-3xl sm:text-4xl text-white">
-              {event.title}
-            </h1>
-            <p className="text-xs sm:text-sm text-white/75 mt-2 font-normal max-w-xl leading-relaxed">
-              {event.highlightText || event.description}
-            </p>
-
-            {/* Event Key Details */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mt-5 pt-4 border-t border-white/12 text-xs font-['Outfit'] text-white/70">
-              <div className="flex items-center gap-2">
-                <Calendar className="w-4 h-4 text-[#38BDF8]" />
-                <span>{event.time}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <MapPin className="w-4 h-4 text-[#38BDF8]" />
-                <span>{event.venue}</span>
-              </div>
-              <div className="flex items-center gap-2 text-amber-300 font-bold col-span-2 sm:col-span-1">
-                <Trophy className="w-4 h-4 text-amber-300" />
-                <span>{event.prize}</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Fee Card */}
-          <div className="frosted-pill-chip p-5 text-center shrink-0 min-w-[170px] bg-black/50 border-white/20">
-            <span className="text-[10px] font-['Outfit'] text-white/50 uppercase tracking-widest block font-bold">
-              TOTAL SQUAD FEE
-            </span>
-            <span className="font-['Outfit'] font-black text-3xl text-white block mt-0.5">
-              {event.fee === 0 ? 'FREE' : `₹${event.fee}`}
-            </span>
-            <span className="text-[10px] text-[#93C5FD] font-['Outfit'] mt-1 block font-medium">
-              Covers entire squad
-            </span>
-          </div>
-        </div>
-      </div>
-
-      {/* Team Registration Form */}
-      <form onSubmit={handleSubmit} className="space-y-6">
-        
-        {/* SECTION 1: TEAM PROFILE */}
-        <div className="dark-blue-glass rounded-[32px] p-6 sm:p-7 relative overflow-hidden">
-          <div className="flex items-center gap-3.5 mb-6 pb-4 border-b border-white/[0.08]">
-            <div className="icon-glass-circle shrink-0 bg-blue-500/20 border-blue-400/30">
-              <Users className="w-5 h-5 text-[#93C5FD]" />
-            </div>
-            <div>
-              <h2 className="font-['Outfit'] font-extrabold text-lg text-white">
-                1. Team Profile & Institution
-              </h2>
-              <p className="text-xs text-white/50 font-normal">
-                Give your squad a memorable name and identify your institution.
+            <div className="relative z-10">
+              <h1 className="font-['Outfit'] font-black text-2xl sm:text-3xl text-white tracking-tight">
+                {event.title}
+              </h1>
+              <p className="text-xs text-white/70 mt-1 max-w-lg line-clamp-1">
+                {event.highlightText || event.description}
               </p>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-xs font-['Outfit'] font-bold text-white/70 uppercase tracking-wider mb-2">
-                Team / Squad Name <span className="text-[#38BDF8]">*</span>
-              </label>
-              <input
-                type="text"
-                required
-                value={teamName}
-                onChange={(e) => setTeamName(e.target.value)}
-                placeholder="e.g. Cyber Titans"
-                className="w-full bg-[#050B1A] border border-white/15 rounded-2xl px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#38BDF8] font-['Outfit'] transition-colors"
-              />
+          <div className="mono-card-shelf px-6 py-4 flex items-center justify-between">
+            <div className="flex items-center gap-4 text-xs font-['Outfit'] text-white/70">
+              <span className="flex items-center gap-1.5">
+                <Calendar className="w-3.5 h-3.5 text-white/50" />
+                {event.time}
+              </span>
+              <span className="flex items-center gap-1.5">
+                <MapPin className="w-3.5 h-3.5 text-white/50" />
+                {event.venue}
+              </span>
             </div>
 
-            <div>
-              <label className="block text-xs font-['Outfit'] font-bold text-white/70 uppercase tracking-wider mb-2">
-                College / Institution <span className="text-[#38BDF8]">*</span>
-              </label>
-              <input
-                type="text"
-                required
-                value={college}
-                onChange={(e) => setCollege(e.target.value)}
-                placeholder="e.g. St. Thomas College, Thrissur"
-                className="w-full bg-[#050B1A] border border-white/15 rounded-2xl px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#38BDF8] font-['Outfit'] transition-colors"
-              />
-            </div>
-
-            <div>
-              <label className="block text-xs font-['Outfit'] font-bold text-white/70 uppercase tracking-wider mb-2">
-                Department
-              </label>
-              <input
-                type="text"
-                value={department}
-                onChange={(e) => setDepartment(e.target.value)}
-                placeholder="e.g. Computer Science"
-                className="w-full bg-[#050B1A] border border-white/15 rounded-2xl px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#38BDF8] font-['Outfit'] transition-colors"
-              />
-            </div>
-
-            <div>
-              <label className="block text-xs font-['Outfit'] font-bold text-white/70 uppercase tracking-wider mb-2">
-                Year of Study
-              </label>
-              <select
-                value={year}
-                onChange={(e) => setYear(e.target.value)}
-                className="w-full bg-[#050B1A] border border-white/15 rounded-2xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#38BDF8] font-['Outfit'] transition-colors"
-              >
-                <option value="1st Year">1st Year</option>
-                <option value="2nd Year">2nd Year</option>
-                <option value="3rd Year">3rd Year</option>
-                <option value="4th Year">4th Year</option>
-                <option value="Postgraduate">Postgraduate</option>
-              </select>
+            <div className="text-right">
+              <span className="font-['Outfit'] font-black text-lg text-white">
+                {event.fee === 0 ? 'FREE' : `₹${event.fee}`}
+              </span>
             </div>
           </div>
         </div>
 
-        {/* SECTION 2: TEAM LEADER */}
-        <div className="dark-blue-glass rounded-[32px] p-6 sm:p-7 relative overflow-hidden">
-          <div className="flex items-center gap-3.5 mb-6 pb-4 border-b border-white/[0.08]">
-            <div className="icon-glass-circle shrink-0 bg-blue-500/20 border-blue-400/30">
-              <User className="w-5 h-5 text-[#93C5FD]" />
-            </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <h2 className="font-['Outfit'] font-extrabold text-lg text-white">
-                  2. Team Leader (Member 1 - Primary Contact)
-                </h2>
-                <span className="px-2.5 py-0.5 rounded-full bg-blue-500/20 text-[#93C5FD] text-[10px] font-['Outfit'] font-bold">
-                  Lead
-                </span>
-              </div>
-              <p className="text-xs text-white/50 font-normal">
-                Access pass and coordination notices will be linked to this contact.
-              </p>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div>
-              <label className="block text-xs font-['Outfit'] font-bold text-white/70 uppercase tracking-wider mb-2">
-                Leader Full Name <span className="text-[#38BDF8]">*</span>
-              </label>
-              <input
-                type="text"
-                required
-                value={leaderName}
-                onChange={(e) => setLeaderName(e.target.value)}
-                placeholder="Full Name"
-                className="w-full bg-[#050B1A] border border-white/15 rounded-2xl px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#38BDF8] font-['Outfit']"
-              />
-            </div>
-
-            <div>
-              <label className="block text-xs font-['Outfit'] font-bold text-white/70 uppercase tracking-wider mb-2">
-                Leader Email <span className="text-[#38BDF8]">*</span>
-              </label>
-              <input
-                type="email"
-                required
-                value={leaderEmail}
-                onChange={(e) => setLeaderEmail(e.target.value)}
-                placeholder="email@example.com"
-                className="w-full bg-[#050B1A] border border-white/15 rounded-2xl px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#38BDF8] font-['Outfit']"
-              />
-            </div>
-
-            <div>
-              <label className="block text-xs font-['Outfit'] font-bold text-white/70 uppercase tracking-wider mb-2">
-                Leader Phone / WhatsApp <span className="text-[#38BDF8]">*</span>
-              </label>
-              <input
-                type="tel"
-                required
-                value={leaderPhone}
-                onChange={(e) => setLeaderPhone(e.target.value)}
-                placeholder="+91 98765 43210"
-                className="w-full bg-[#050B1A] border border-white/15 rounded-2xl px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#38BDF8] font-['Outfit']"
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* SECTION 3: TEAMMATES DETAILS */}
-        <div className="dark-blue-glass rounded-[32px] p-6 sm:p-7 relative overflow-hidden">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6 pb-4 border-b border-white/[0.08]">
-            <div className="flex items-center gap-3.5">
-              <div className="icon-glass-circle shrink-0 bg-blue-500/20 border-blue-400/30">
-                <Users className="w-5 h-5 text-[#93C5FD]" />
+        {/* Registration Form */}
+        <form onSubmit={handleSubmit} className="space-y-6">
+          
+          {/* SECTION 1: TEAM PROFILE */}
+          <div className="mono-card-surface p-6 space-y-4">
+            <div className="flex items-center gap-3 pb-3 border-b border-white/[0.08]">
+              <div className="mono-icon-btn w-8 h-8 bg-[#232938]">
+                <Users className="w-4 h-4 text-white" />
               </div>
               <div>
-                <h2 className="font-['Outfit'] font-extrabold text-lg text-white">
-                  3. Teammates Roster ({teammates.length} Added + 1 Leader = {teammates.length + 1} Total)
+                <h2 className="font-['Outfit'] font-extrabold text-base text-white">
+                  1. Team Profile & Institution
                 </h2>
-                <p className="text-xs text-white/60 font-normal">
-                  All teammates will be officially printed and registered on the squad pass.
+                <p className="text-xs text-white/50 font-normal">
+                  Identify your squad and institution.
                 </p>
               </div>
             </div>
 
-            {teammates.length < maxTeammates && (
-              <button
-                type="button"
-                onClick={handleAddTeammate}
-                className="btn-glass-white inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs uppercase tracking-wider cursor-pointer self-start sm:self-center"
-              >
-                <Plus className="w-4 h-4" />
-                <span>Add Teammate</span>
-              </button>
-            )}
-          </div>
-
-          <div className="space-y-4">
-            {teammates.map((teammate, idx) => (
-              <div
-                key={idx}
-                className="p-5 rounded-2xl bg-[#040816]/70 border border-white/15 relative"
-              >
-                <div className="flex items-center justify-between mb-3 pb-2 border-b border-white/10">
-                  <span className="font-['Outfit'] text-xs font-bold text-[#93C5FD] flex items-center gap-2">
-                    <span className="w-6 h-6 rounded-full bg-[#2563EB]/40 flex items-center justify-center text-white text-[11px]">
-                      #{idx + 2}
-                    </span>
-                    <span>Teammate {idx + 2}</span>
-                  </span>
-
-                  {teammates.length > minTeammates && (
-                    <button
-                      type="button"
-                      onClick={() => handleRemoveTeammate(idx)}
-                      className="text-red-400/70 hover:text-red-400 p-1.5 rounded-lg hover:bg-white/5 transition-colors cursor-pointer"
-                      title="Remove teammate"
-                    >
-                      <Trash2 className="w-4 h-4" />
-                    </button>
-                  )}
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                  <div>
-                    <label className="block text-[11px] font-['Outfit'] font-bold text-white/60 uppercase tracking-wider mb-1.5">
-                      Full Name <span className="text-[#38BDF8]">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      value={teammate.name}
-                      onChange={(e) => handleTeammateChange(idx, 'name', e.target.value)}
-                      placeholder={`Teammate ${idx + 2} Name`}
-                      className="w-full bg-[#030612] border border-white/12 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder:text-white/30 focus:outline-none focus:border-[#38BDF8] font-['Outfit']"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-[11px] font-['Outfit'] font-bold text-white/60 uppercase tracking-wider mb-1.5">
-                      Email (Optional)
-                    </label>
-                    <input
-                      type="email"
-                      value={teammate.email}
-                      onChange={(e) => handleTeammateChange(idx, 'email', e.target.value)}
-                      placeholder="teammate@example.com"
-                      className="w-full bg-[#030612] border border-white/12 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder:text-white/30 focus:outline-none focus:border-[#38BDF8] font-['Outfit']"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-[11px] font-['Outfit'] font-bold text-white/60 uppercase tracking-wider mb-1.5">
-                      Phone (Optional)
-                    </label>
-                    <input
-                      type="tel"
-                      value={teammate.phone}
-                      onChange={(e) => handleTeammateChange(idx, 'phone', e.target.value)}
-                      placeholder="+91 Phone"
-                      className="w-full bg-[#030612] border border-white/12 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder:text-white/30 focus:outline-none focus:border-[#38BDF8] font-['Outfit']"
-                    />
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* SECTION 4: PAYMENT & QR CODE */}
-        <div className="dark-blue-glass rounded-[32px] p-6 sm:p-7 relative overflow-hidden">
-          <div className="flex items-center gap-3.5 mb-6 pb-4 border-b border-white/[0.08]">
-            <div className="icon-glass-circle shrink-0 bg-blue-500/20 border-blue-400/30">
-              <QrCode className="w-5 h-5 text-[#93C5FD]" />
-            </div>
-            <div>
-              <h2 className="font-['Outfit'] font-extrabold text-lg text-white">
-                4. Payment & Verification
-              </h2>
-              <p className="text-xs text-white/50 font-normal">
-                Scan the official UPI QR code or pay to the UPI ID, then enter your transaction reference.
-              </p>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-            
-            {/* Left: UPI QR Card */}
-            <div className="flex flex-col items-center justify-center p-6 rounded-2xl bg-black/50 border border-white/15 text-center">
-              {upiQrUrl ? (
-                <div className="p-3 bg-white rounded-2xl shadow-xl inline-block mb-4">
-                  <img src={upiQrUrl} alt="UPI QR" className="w-36 h-36" />
-                </div>
-              ) : (
-                <div className="w-36 h-36 bg-white/5 rounded-2xl border border-white/10 flex items-center justify-center mb-4 text-white/40 text-xs">
-                  Free Event
-                </div>
-              )}
-
-              <div className="w-full">
-                <span className="text-[10px] font-['Outfit'] text-white/50 uppercase tracking-widest block font-bold">
-                  OFFICIAL UPI ID
-                </span>
-                
-                <div className="flex items-center justify-center gap-2 mt-1.5">
-                  <span className="font-['Outfit'] text-xs text-white font-bold bg-white/10 px-4 py-1.5 rounded-full border border-white/15">
-                    {settings.upiId || 'abhiramcs2007@oksbi'}
-                  </span>
-                  
-                  <button
-                    type="button"
-                    onClick={handleCopyUpi}
-                    className="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer"
-                    title="Copy UPI ID"
-                  >
-                    {copiedUpi ? <Check className="w-4 h-4 text-[#38BDF8]" /> : <Copy className="w-4 h-4" />}
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            {/* Right: Payment Amount & UTR Input */}
-            <div className="space-y-4">
-              <div className="p-5 rounded-2xl bg-[#091530] border border-blue-500/30">
-                <div className="flex justify-between items-center text-xs font-['Outfit']">
-                  <span className="text-white/60">Squad Challenge:</span>
-                  <span className="text-white font-bold">{event.title}</span>
-                </div>
-                <div className="flex justify-between items-center text-xs font-['Outfit'] mt-2 pt-2 border-t border-white/10">
-                  <span className="text-white/60">Total Squad Fee:</span>
-                  <span className="text-2xl font-black text-[#60A5FA]">
-                    {event.fee === 0 ? 'FREE' : `₹${event.fee}`}
-                  </span>
-                </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-xs font-['Outfit'] font-bold text-white/70 uppercase tracking-wider mb-2">
+                  Team Name <span className="text-[#38BDF8]">*</span>
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={teamName}
+                  onChange={(e) => setTeamName(e.target.value)}
+                  placeholder="e.g. Cyber Titans"
+                  className="w-full mono-input-inset rounded-2xl px-4 py-3 text-sm text-white placeholder:text-white/30 font-['Outfit']"
+                />
               </div>
 
               <div>
                 <label className="block text-xs font-['Outfit'] font-bold text-white/70 uppercase tracking-wider mb-2">
-                  UPI Transaction ID / UTR Number {event.fee > 0 && <span className="text-[#38BDF8]">*</span>}
+                  College / Institution <span className="text-[#38BDF8]">*</span>
                 </label>
                 <input
                   type="text"
-                  required={event.fee > 0}
-                  value={paymentUtr}
-                  onChange={(e) => setPaymentUtr(e.target.value.toUpperCase())}
-                  placeholder="e.g. 423871928371 or UTR-XXXXXX"
-                  className="w-full bg-[#050B1A] border border-white/15 rounded-2xl px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#38BDF8] font-['Outfit'] tracking-wider uppercase"
+                  required
+                  value={college}
+                  onChange={(e) => setCollege(e.target.value)}
+                  placeholder="e.g. St. Thomas College"
+                  className="w-full mono-input-inset rounded-2xl px-4 py-3 text-sm text-white placeholder:text-white/30 font-['Outfit']"
                 />
-                <p className="text-[11px] text-white/40 font-['Outfit'] mt-1.5">
-                  Available in your Google Pay, PhonePe, or Paytm confirmation screen.
+              </div>
+
+              <div>
+                <label className="block text-xs font-['Outfit'] font-bold text-white/70 uppercase tracking-wider mb-2">
+                  Department
+                </label>
+                <input
+                  type="text"
+                  value={department}
+                  onChange={(e) => setDepartment(e.target.value)}
+                  placeholder="Computer Science"
+                  className="w-full mono-input-inset rounded-2xl px-4 py-3 text-sm text-white placeholder:text-white/30 font-['Outfit']"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-['Outfit'] font-bold text-white/70 uppercase tracking-wider mb-2">
+                  Year of Study
+                </label>
+                <select
+                  value={year}
+                  onChange={(e) => setYear(e.target.value)}
+                  className="w-full mono-input-inset rounded-2xl px-4 py-3 text-sm text-white font-['Outfit']"
+                >
+                  <option value="1st Year">1st Year</option>
+                  <option value="2nd Year">2nd Year</option>
+                  <option value="3rd Year">3rd Year</option>
+                  <option value="4th Year">4th Year</option>
+                  <option value="Postgraduate">Postgraduate</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          {/* SECTION 2: TEAM LEADER */}
+          <div className="mono-card-surface p-6 space-y-4">
+            <div className="flex items-center gap-3 pb-3 border-b border-white/[0.08]">
+              <div className="mono-icon-btn w-8 h-8 bg-[#232938]">
+                <User className="w-4 h-4 text-white" />
+              </div>
+              <div>
+                <h2 className="font-['Outfit'] font-extrabold text-base text-white">
+                  2. Team Leader (Member 1)
+                </h2>
+                <p className="text-xs text-white/50 font-normal">
+                  Pass & notifications will be delivered to this leader.
                 </p>
               </div>
             </div>
 
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div>
+                <label className="block text-xs font-['Outfit'] font-bold text-white/70 uppercase tracking-wider mb-2">
+                  Leader Name <span className="text-[#38BDF8]">*</span>
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={leaderName}
+                  onChange={(e) => setLeaderName(e.target.value)}
+                  placeholder="Full Name"
+                  className="w-full mono-input-inset rounded-2xl px-4 py-3 text-sm text-white placeholder:text-white/30 font-['Outfit']"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-['Outfit'] font-bold text-white/70 uppercase tracking-wider mb-2">
+                  Leader Email <span className="text-[#38BDF8]">*</span>
+                </label>
+                <input
+                  type="email"
+                  required
+                  value={leaderEmail}
+                  onChange={(e) => setLeaderEmail(e.target.value)}
+                  placeholder="email@example.com"
+                  className="w-full mono-input-inset rounded-2xl px-4 py-3 text-sm text-white placeholder:text-white/30 font-['Outfit']"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-['Outfit'] font-bold text-white/70 uppercase tracking-wider mb-2">
+                  Leader Phone <span className="text-[#38BDF8]">*</span>
+                </label>
+                <input
+                  type="tel"
+                  required
+                  value={leaderPhone}
+                  onChange={(e) => setLeaderPhone(e.target.value)}
+                  placeholder="+91 98765 43210"
+                  className="w-full mono-input-inset rounded-2xl px-4 py-3 text-sm text-white placeholder:text-white/30 font-['Outfit']"
+                />
+              </div>
+            </div>
           </div>
-        </div>
 
-        {/* Error message */}
-        {errorMessage && (
-          <div className="p-4 rounded-2xl bg-red-500/15 border border-red-500/30 flex items-center gap-3 text-red-200 text-xs font-['Outfit']">
-            <AlertCircle className="w-4 h-4 shrink-0 text-red-400" />
-            <span>{errorMessage}</span>
+          {/* SECTION 3: TEAMMATES ROSTER */}
+          <div className="mono-card-surface p-6 space-y-4">
+            <div className="flex items-center justify-between pb-3 border-b border-white/[0.08]">
+              <div className="flex items-center gap-3">
+                <div className="mono-icon-btn w-8 h-8 bg-[#232938]">
+                  <Users className="w-4 h-4 text-white" />
+                </div>
+                <div>
+                  <h2 className="font-['Outfit'] font-extrabold text-base text-white">
+                    3. Squad Roster ({teammates.length + 1} Total Members)
+                  </h2>
+                  <p className="text-xs text-white/50 font-normal">
+                    Names printed on the official squad entry badge.
+                  </p>
+                </div>
+              </div>
+
+              {teammates.length < maxTeammates && (
+                <button
+                  type="button"
+                  onClick={handleAddTeammate}
+                  className="btn-mono-accent px-3.5 py-1.5 rounded-full text-xs font-['Outfit'] font-bold flex items-center gap-1.5"
+                >
+                  <Plus className="w-3.5 h-3.5" />
+                  <span>Add Member</span>
+                </button>
+              )}
+            </div>
+
+            <div className="space-y-3">
+              {teammates.map((teammate, idx) => (
+                <div
+                  key={idx}
+                  className="p-4 rounded-2xl bg-[#0F131B] border border-white/[0.06] space-y-3"
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="font-['Outfit'] text-xs font-bold text-white/80 flex items-center gap-2">
+                      <span className="w-5 h-5 rounded-full bg-[#1F2535] flex items-center justify-center text-[10px] text-white">
+                        {idx + 2}
+                      </span>
+                      <span>Teammate {idx + 2}</span>
+                    </span>
+
+                    {teammates.length > minTeammates && (
+                      <button
+                        type="button"
+                        onClick={() => handleRemoveTeammate(idx)}
+                        className="text-white/40 hover:text-red-400 p-1 transition-colors cursor-pointer"
+                      >
+                        <Trash2 className="w-3.5 h-3.5" />
+                      </button>
+                    )}
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div>
+                      <input
+                        type="text"
+                        required
+                        value={teammate.name}
+                        onChange={(e) => handleTeammateChange(idx, 'name', e.target.value)}
+                        placeholder="Full Name *"
+                        className="w-full mono-input-inset rounded-xl px-3.5 py-2 text-xs text-white placeholder:text-white/30 font-['Outfit']"
+                      />
+                    </div>
+                    <div>
+                      <input
+                        type="email"
+                        value={teammate.email}
+                        onChange={(e) => handleTeammateChange(idx, 'email', e.target.value)}
+                        placeholder="Email (Optional)"
+                        className="w-full mono-input-inset rounded-xl px-3.5 py-2 text-xs text-white placeholder:text-white/30 font-['Outfit']"
+                      />
+                    </div>
+                    <div>
+                      <input
+                        type="tel"
+                        value={teammate.phone}
+                        onChange={(e) => handleTeammateChange(idx, 'phone', e.target.value)}
+                        placeholder="Phone (Optional)"
+                        className="w-full mono-input-inset rounded-xl px-3.5 py-2 text-xs text-white placeholder:text-white/30 font-['Outfit']"
+                      />
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
-        )}
 
-        {/* Form Submission Action Bar */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
-          <p className="text-xs text-white/50 font-['Outfit'] text-center sm:text-left">
-            By registering, your squad will receive an official verifiable digital pass.
-          </p>
+          {/* SECTION 4: PAYMENT & QR */}
+          <div className="mono-card-surface p-6 space-y-4">
+            <div className="flex items-center gap-3 pb-3 border-b border-white/[0.08]">
+              <div className="mono-icon-btn w-8 h-8 bg-[#232938]">
+                <QrCode className="w-4 h-4 text-white" />
+              </div>
+              <div>
+                <h2 className="font-['Outfit'] font-extrabold text-base text-white">
+                  4. Payment & Verification
+                </h2>
+                <p className="text-xs text-white/50 font-normal">
+                  Official UPI payment for instant squad pass generation.
+                </p>
+              </div>
+            </div>
 
-          <button
-            type="submit"
-            disabled={isSubmitting}
-            className="btn-fluid-blue w-full sm:w-auto px-8 py-3.5 rounded-full font-['Outfit'] font-extrabold text-xs uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
-          >
-            <ShieldCheck className="w-4 h-4" />
-            <span>{isSubmitting ? 'Issuing Team Pass...' : 'Register Team & Issue Pass'}</span>
-          </button>
-        </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+              {/* QR Code Block */}
+              <div className="flex flex-col items-center justify-center p-5 rounded-2xl bg-[#0A0D13] border border-white/[0.08] text-center">
+                {upiQrUrl ? (
+                  <div className="p-2.5 bg-white rounded-2xl shadow-xl inline-block mb-3">
+                    <img src={upiQrUrl} alt="UPI QR" className="w-32 h-32" />
+                  </div>
+                ) : (
+                  <div className="w-32 h-32 bg-white/5 rounded-2xl border border-white/10 flex items-center justify-center mb-3 text-white/40 text-xs">
+                    Free Event
+                  </div>
+                )}
 
-      </form>
+                <span className="text-[10px] font-['Outfit'] text-white/50 uppercase tracking-widest block font-bold">
+                  OFFICIAL UPI ID
+                </span>
+                <div className="flex items-center justify-center gap-2 mt-1">
+                  <span className="font-['Outfit'] text-xs text-white font-bold bg-[#171C26] px-3 py-1 rounded-full border border-white/10">
+                    {settings.upiId || 'abhiramcs2007@oksbi'}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={handleCopyUpi}
+                    className="p-1.5 rounded-full bg-white/10 text-white cursor-pointer"
+                  >
+                    {copiedUpi ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                  </button>
+                </div>
+              </div>
 
+              {/* UTR Input */}
+              <div className="space-y-3">
+                <div className="p-4 rounded-2xl bg-[#0A0D13] border border-white/[0.08]">
+                  <div className="flex justify-between items-center text-xs font-['Outfit']">
+                    <span className="text-white/60">Squad Challenge:</span>
+                    <span className="text-white font-bold">{event.title}</span>
+                  </div>
+                  <div className="flex justify-between items-center text-xs font-['Outfit'] mt-1.5 pt-1.5 border-t border-white/10">
+                    <span className="text-white/60">Total Fee:</span>
+                    <span className="text-xl font-black text-white">
+                      {event.fee === 0 ? 'FREE' : `₹${event.fee}`}
+                    </span>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-['Outfit'] font-bold text-white/70 uppercase tracking-wider mb-1.5">
+                    UPI Transaction ID / UTR {event.fee > 0 && <span className="text-[#38BDF8]">*</span>}
+                  </label>
+                  <input
+                    type="text"
+                    required={event.fee > 0}
+                    value={paymentUtr}
+                    onChange={(e) => setPaymentUtr(e.target.value.toUpperCase())}
+                    placeholder="e.g. 423871928371 or UTR-XXXXXX"
+                    className="w-full mono-input-inset rounded-xl px-4 py-2.5 text-xs text-white placeholder:text-white/30 font-['Outfit'] uppercase"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Error Message */}
+          {errorMessage && (
+            <div className="p-4 rounded-2xl bg-red-500/15 border border-red-500/30 flex items-center gap-3 text-red-200 text-xs font-['Outfit']">
+              <AlertCircle className="w-4 h-4 shrink-0 text-red-400" />
+              <span>{errorMessage}</span>
+            </div>
+          )}
+
+          {/* Submit */}
+          <div className="flex justify-end pt-2">
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="btn-mono-accent px-8 py-3.5 rounded-full text-xs font-extrabold uppercase tracking-wider flex items-center gap-2"
+            >
+              <ShieldCheck className="w-4 h-4" />
+              <span>{isSubmitting ? 'Issuing Pass...' : 'Issue Squad Pass'}</span>
+            </button>
+          </div>
+
+        </form>
+
+      </div>
     </div>
   );
 };
