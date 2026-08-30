@@ -6,7 +6,6 @@ import {
   Check, 
   ShieldCheck, 
   ArrowLeft,
-  ArrowUpRight,
   Users
 } from 'lucide-react';
 import html2canvas from 'html2canvas';
@@ -34,7 +33,7 @@ export const DigitalPassView: React.FC<DigitalPassViewProps> = ({
         particleCount: 80,
         spread: 70,
         origin: { y: 0.6 },
-        colors: ['#2563EB', '#38BDF8', '#60A5FA', '#FFFFFF', '#4F46E5'],
+        colors: ['#2563EB', '#38BDF8', '#60A5FA', '#FFFFFF', '#1D4ED8'],
       });
     } catch {}
   }, []);
@@ -48,7 +47,7 @@ export const DigitalPassView: React.FC<DigitalPassViewProps> = ({
       const canvas = await html2canvas(passCardRef.current, {
         scale: 3,
         useCORS: true,
-        backgroundColor: '#000000',
+        backgroundColor: '#030611',
         logging: false,
       });
       const link = document.createElement('a');
@@ -75,9 +74,9 @@ export const DigitalPassView: React.FC<DigitalPassViewProps> = ({
   return (
     <div className="w-full max-w-3xl mx-auto px-4 py-8">
       
-      {/* Confirmed Header with Fintech Typography */}
+      {/* Confirmed Header with Dark Blue Typography */}
       <div className="text-center mb-8">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/20 border border-blue-400/30 text-[#93C5FD] font-['Outfit'] text-xs font-bold mb-3">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#0B1530] border border-blue-500/30 text-[#93C5FD] font-['Outfit'] text-xs font-bold mb-3">
           <ShieldCheck className="w-4 h-4 text-[#38BDF8]" />
           <span>OFFICIAL DIGITAL ACCESS BADGE</span>
         </div>
@@ -90,12 +89,12 @@ export const DigitalPassView: React.FC<DigitalPassViewProps> = ({
         </p>
       </div>
 
-      {/* Action Toolbar with White & Electric Pill Buttons */}
+      {/* Action Toolbar with Fluid Blue & Glass Buttons */}
       <div className="flex flex-wrap items-center justify-center gap-3 mb-8 no-print">
         <button
           onClick={handleDownloadImage}
           disabled={isDownloading}
-          className="btn-electric-blue flex items-center gap-2 px-6 py-3 rounded-full font-['Outfit'] font-bold text-xs uppercase tracking-wider cursor-pointer"
+          className="btn-fluid-blue flex items-center gap-2 px-6 py-3 rounded-full font-['Outfit'] font-bold text-xs uppercase tracking-wider cursor-pointer"
         >
           <Download className="w-4 h-4" />
           <span>{isDownloading ? 'Exporting...' : 'Download Pass (PNG)'}</span>
@@ -103,7 +102,7 @@ export const DigitalPassView: React.FC<DigitalPassViewProps> = ({
 
         <button
           onClick={handlePrint}
-          className="btn-white-action flex items-center gap-2 px-5 py-3 rounded-full text-xs uppercase tracking-wider cursor-pointer"
+          className="btn-glass-white flex items-center gap-2 px-5 py-3 rounded-full text-xs uppercase tracking-wider cursor-pointer"
         >
           <Printer className="w-4 h-4" />
           <span>Print</span>
@@ -111,7 +110,7 @@ export const DigitalPassView: React.FC<DigitalPassViewProps> = ({
 
         <button
           onClick={handleCopyShareLink}
-          className="flex items-center gap-2 px-5 py-3 rounded-full bg-white/[0.08] hover:bg-white/[0.14] text-white font-['Outfit'] font-bold text-xs border border-white/15 transition-all cursor-pointer"
+          className="flex items-center gap-2 px-5 py-3 rounded-full bg-[#0B1530]/80 hover:bg-[#122045] text-white font-['Outfit'] font-bold text-xs border border-white/15 transition-all cursor-pointer"
         >
           {copiedLink ? (
             <>
@@ -127,16 +126,16 @@ export const DigitalPassView: React.FC<DigitalPassViewProps> = ({
         </button>
       </div>
 
-      {/* Printable / Capturable Pass Card (Styled like Luxury Crypto Asset Card in Screenshot) */}
+      {/* Printable / Capturable Pass Card (Dark Blue Fluid Glass) */}
       <div className="flex justify-center">
         <div
           ref={passCardRef}
           id="srishti-pass-card"
-          className="w-full max-w-xl card-layer-3 rounded-[32px] p-6 sm:p-8 relative overflow-hidden text-white printable-pass-card shadow-2xl border border-white/20"
+          className="w-full max-w-xl dark-blue-glass-glow rounded-[32px] p-6 sm:p-8 relative overflow-hidden text-white printable-pass-card shadow-2xl border border-white/20"
         >
-          {/* Luminous Atmospheric Diffused Aurora Glow (Inspired by Reference Screenshot) */}
+          {/* Luminous Dark Blue Fluid Ambient Aura */}
           <div className="absolute bottom-0 right-0 w-80 h-80 bg-[#2563EB]/35 rounded-full blur-[80px] pointer-events-none" />
-          <div className="absolute top-0 left-0 w-60 h-60 bg-[#4F46E5]/20 rounded-full blur-[70px] pointer-events-none" />
+          <div className="absolute top-0 left-0 w-60 h-60 bg-[#1D4ED8]/25 rounded-full blur-[70px] pointer-events-none" />
 
           {/* Header Row */}
           <div className="relative z-10 flex items-start justify-between border-b border-white/12 pb-5">
@@ -157,7 +156,7 @@ export const DigitalPassView: React.FC<DigitalPassViewProps> = ({
 
             <div className="text-right">
               <span className="text-[10px] text-white/40 uppercase tracking-widest block font-['Outfit'] font-bold">PASS ID</span>
-              <span className="text-base sm:text-lg font-black text-white bg-white/10 px-3.5 py-1 rounded-full border border-white/20 inline-block mt-0.5 font-['IBM_Plex_Mono']">
+              <span className="text-base sm:text-lg font-black text-white bg-[#0A1633] px-3.5 py-1 rounded-full border border-blue-400/40 inline-block mt-0.5 font-['IBM_Plex_Mono']">
                 {record.passId}
               </span>
             </div>
@@ -187,9 +186,9 @@ export const DigitalPassView: React.FC<DigitalPassViewProps> = ({
 
               {/* Team Roster section if team registration */}
               {record.teammates && record.teammates.length > 0 && (
-                <div className="p-4 rounded-2xl bg-black/40 border border-white/15">
+                <div className="p-4 rounded-2xl bg-[#050C1F]/80 border border-white/15">
                   <span className="font-['Outfit'] text-[11px] text-[#93C5FD] uppercase tracking-wider block mb-2 font-bold flex items-center gap-1.5">
-                    <Users className="w-3.5 h-3.5" />
+                    <Users className="w-3.5 h-3.5 text-[#38BDF8]" />
                     <span>TEAM ROSTER ({record.teammates.length + 1} SQUAD MEMBERS)</span>
                   </span>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-['Outfit']">
@@ -238,7 +237,7 @@ export const DigitalPassView: React.FC<DigitalPassViewProps> = ({
                   {record.selectedEventNames.map((name, idx) => (
                     <span 
                       key={idx} 
-                      className="px-3 py-1 rounded-full bg-white/10 border border-white/15 text-xs font-semibold text-[#93C5FD] font-['Outfit']"
+                      className="px-3 py-1 rounded-full bg-blue-500/20 border border-blue-400/30 text-xs font-semibold text-[#93C5FD] font-['Outfit']"
                     >
                       {name}
                     </span>
@@ -248,7 +247,7 @@ export const DigitalPassView: React.FC<DigitalPassViewProps> = ({
             </div>
 
             {/* Right Col: QR Code */}
-            <div className="flex flex-col items-center justify-center p-4 rounded-2xl bg-black/50 border border-white/15">
+            <div className="flex flex-col items-center justify-center p-4 rounded-2xl bg-[#04091A]/85 border border-white/15">
               <CustomSrishtiQR value={verificationUrl} size={135} />
               <div className="mt-3 text-center font-['Outfit']">
                 <span className="text-[10px] text-[#38BDF8] uppercase font-bold tracking-wider flex items-center justify-center gap-1">

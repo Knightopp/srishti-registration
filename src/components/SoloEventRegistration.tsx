@@ -51,7 +51,7 @@ export const SoloEventRegistration: React.FC<SoloEventRegistrationProps> = ({
       QRCode.toDataURL(upiString, {
         width: 180,
         margin: 1,
-        color: { dark: '#04060A', light: '#FFFFFF' },
+        color: { dark: '#040611', light: '#FFFFFF' },
       }).then(setUpiQrUrl).catch(() => {});
     } else {
       setUpiQrUrl('');
@@ -112,24 +112,24 @@ export const SoloEventRegistration: React.FC<SoloEventRegistrationProps> = ({
       {/* Back Button */}
       <button
         onClick={onBack}
-        className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.06] hover:bg-white/[0.12] border border-white/12 text-white/80 hover:text-white text-xs font-['Outfit'] font-bold uppercase tracking-wider mb-6 transition-all cursor-pointer"
+        className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.08] hover:bg-white/[0.14] border border-white/12 text-white/80 hover:text-white text-xs font-['Outfit'] font-bold uppercase tracking-wider mb-6 transition-all cursor-pointer"
       >
         <ArrowLeft className="w-4 h-4" />
         <span>Back to Solo Events</span>
       </button>
 
       {/* Event Overview Banner */}
-      <div className="card-layer-3 rounded-[32px] p-6 sm:p-8 mb-8 relative overflow-hidden shadow-2xl">
+      <div className="dark-blue-glass-glow rounded-[32px] p-6 sm:p-8 mb-8 relative overflow-hidden shadow-2xl">
         <div className="absolute top-0 right-0 w-80 h-80 bg-[#38BDF8]/20 rounded-full blur-3xl pointer-events-none" />
 
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="flex-1">
             <div className="flex flex-wrap items-center gap-2 mb-2.5">
-              <span className="px-3 py-1 rounded-full bg-black/50 border border-white/20 text-[#60A5FA] text-xs font-['Outfit'] font-bold uppercase tracking-wider">
+              <span className="px-3 py-1 rounded-full bg-black/60 border border-white/20 text-[#60A5FA] text-xs font-['Outfit'] font-bold uppercase tracking-wider">
                 {event.stageLabel}
               </span>
-              <span className="pill-growth-badge px-3 py-1 text-xs flex items-center gap-1.5">
-                <User className="w-3.5 h-3.5" />
+              <span className="px-3 py-1 rounded-full bg-blue-500/25 border border-blue-400/40 text-[#93C5FD] text-xs font-['Outfit'] font-bold flex items-center gap-1.5 shadow-sm">
+                <User className="w-3.5 h-3.5 text-[#38BDF8]" />
                 <span>1 Participant</span>
               </span>
             </div>
@@ -137,7 +137,7 @@ export const SoloEventRegistration: React.FC<SoloEventRegistrationProps> = ({
             <h1 className="headline-display text-3xl sm:text-4xl text-white">
               {event.title}
             </h1>
-            <p className="text-xs sm:text-sm text-white/70 mt-2 font-normal max-w-xl leading-relaxed">
+            <p className="text-xs sm:text-sm text-white/75 mt-2 font-normal max-w-xl leading-relaxed">
               {event.highlightText || event.description}
             </p>
 
@@ -159,7 +159,7 @@ export const SoloEventRegistration: React.FC<SoloEventRegistrationProps> = ({
           </div>
 
           {/* Fee Card */}
-          <div className="pill-price-tag p-5 text-center shrink-0 min-w-[170px] bg-black/40 border-white/20">
+          <div className="frosted-pill-chip p-5 text-center shrink-0 min-w-[170px] bg-black/50 border-white/20">
             <span className="text-[10px] font-['Outfit'] text-white/50 uppercase tracking-widest block font-bold">
               INDIVIDUAL FEE
             </span>
@@ -177,10 +177,10 @@ export const SoloEventRegistration: React.FC<SoloEventRegistrationProps> = ({
       <form onSubmit={handleSubmit} className="space-y-6">
         
         {/* Attendee Details */}
-        <div className="card-layer-1 rounded-[28px] p-6 sm:p-7">
+        <div className="dark-blue-glass rounded-[32px] p-6 sm:p-7">
           <div className="flex items-center gap-3.5 mb-6 pb-4 border-b border-white/[0.08]">
-            <div className="icon-circle-btn shrink-0">
-              <User className="w-5 h-5 text-black" />
+            <div className="icon-glass-circle shrink-0 bg-blue-500/20 border-blue-400/30">
+              <User className="w-5 h-5 text-[#93C5FD]" />
             </div>
             <div>
               <h2 className="font-['Outfit'] font-extrabold text-lg text-white">
@@ -203,7 +203,7 @@ export const SoloEventRegistration: React.FC<SoloEventRegistrationProps> = ({
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
                 placeholder="Abhiram C S"
-                className="w-full bg-[#050810] border border-white/15 rounded-2xl px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#38BDF8] font-['Outfit']"
+                className="w-full bg-[#050B1A] border border-white/15 rounded-2xl px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#38BDF8] font-['Outfit']"
               />
             </div>
 
@@ -217,7 +217,7 @@ export const SoloEventRegistration: React.FC<SoloEventRegistrationProps> = ({
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="participant@example.com"
-                className="w-full bg-[#050810] border border-white/15 rounded-2xl px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#38BDF8] font-['Outfit']"
+                className="w-full bg-[#050B1A] border border-white/15 rounded-2xl px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#38BDF8] font-['Outfit']"
               />
             </div>
 
@@ -231,7 +231,7 @@ export const SoloEventRegistration: React.FC<SoloEventRegistrationProps> = ({
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
                 placeholder="+91 98765 43210"
-                className="w-full bg-[#050810] border border-white/15 rounded-2xl px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#38BDF8] font-['Outfit']"
+                className="w-full bg-[#050B1A] border border-white/15 rounded-2xl px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#38BDF8] font-['Outfit']"
               />
             </div>
 
@@ -245,7 +245,7 @@ export const SoloEventRegistration: React.FC<SoloEventRegistrationProps> = ({
                 value={college}
                 onChange={(e) => setCollege(e.target.value)}
                 placeholder="St. Thomas College, Thrissur"
-                className="w-full bg-[#050810] border border-white/15 rounded-2xl px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#38BDF8] font-['Outfit']"
+                className="w-full bg-[#050B1A] border border-white/15 rounded-2xl px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#38BDF8] font-['Outfit']"
               />
             </div>
 
@@ -258,7 +258,7 @@ export const SoloEventRegistration: React.FC<SoloEventRegistrationProps> = ({
                 value={department}
                 onChange={(e) => setDepartment(e.target.value)}
                 placeholder="Computer Science"
-                className="w-full bg-[#050810] border border-white/15 rounded-2xl px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#38BDF8] font-['Outfit']"
+                className="w-full bg-[#050B1A] border border-white/15 rounded-2xl px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#38BDF8] font-['Outfit']"
               />
             </div>
 
@@ -269,7 +269,7 @@ export const SoloEventRegistration: React.FC<SoloEventRegistrationProps> = ({
               <select
                 value={year}
                 onChange={(e) => setYear(e.target.value)}
-                className="w-full bg-[#050810] border border-white/15 rounded-2xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#38BDF8] font-['Outfit']"
+                className="w-full bg-[#050B1A] border border-white/15 rounded-2xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#38BDF8] font-['Outfit']"
               >
                 <option value="1st Year">1st Year</option>
                 <option value="2nd Year">2nd Year</option>
@@ -282,10 +282,10 @@ export const SoloEventRegistration: React.FC<SoloEventRegistrationProps> = ({
         </div>
 
         {/* Payment & QR Section */}
-        <div className="card-layer-2 rounded-[28px] p-6 sm:p-7">
+        <div className="dark-blue-glass rounded-[32px] p-6 sm:p-7">
           <div className="flex items-center gap-3.5 mb-6 pb-4 border-b border-white/[0.08]">
-            <div className="icon-circle-btn shrink-0">
-              <QrCode className="w-5 h-5 text-black" />
+            <div className="icon-glass-circle shrink-0 bg-blue-500/20 border-blue-400/30">
+              <QrCode className="w-5 h-5 text-[#93C5FD]" />
             </div>
             <div>
               <h2 className="font-['Outfit'] font-extrabold text-lg text-white">
@@ -334,7 +334,7 @@ export const SoloEventRegistration: React.FC<SoloEventRegistrationProps> = ({
 
             {/* UTR Input */}
             <div className="space-y-4">
-              <div className="p-5 rounded-2xl bg-[#091024] border border-blue-500/30">
+              <div className="p-5 rounded-2xl bg-[#091530] border border-blue-500/30">
                 <div className="flex justify-between items-center text-xs font-['Outfit']">
                   <span className="text-white/60">Selected Arena:</span>
                   <span className="text-white font-bold">{event.title}</span>
@@ -357,7 +357,7 @@ export const SoloEventRegistration: React.FC<SoloEventRegistrationProps> = ({
                   value={paymentUtr}
                   onChange={(e) => setPaymentUtr(e.target.value.toUpperCase())}
                   placeholder="e.g. 423871928371 or UTR-XXXXXX"
-                  className="w-full bg-[#050810] border border-white/15 rounded-2xl px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#38BDF8] font-['Outfit'] uppercase tracking-wider"
+                  className="w-full bg-[#050B1A] border border-white/15 rounded-2xl px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#38BDF8] font-['Outfit'] uppercase tracking-wider"
                 />
               </div>
             </div>
@@ -381,7 +381,7 @@ export const SoloEventRegistration: React.FC<SoloEventRegistrationProps> = ({
           <button
             type="submit"
             disabled={isSubmitting}
-            className="btn-electric-blue w-full sm:w-auto px-8 py-3.5 rounded-full font-['Outfit'] font-extrabold text-xs uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+            className="btn-fluid-blue w-full sm:w-auto px-8 py-3.5 rounded-full font-['Outfit'] font-extrabold text-xs uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
           >
             <ShieldCheck className="w-4 h-4" />
             <span>{isSubmitting ? 'Issuing Pass...' : 'Issue Solo Pass'}</span>

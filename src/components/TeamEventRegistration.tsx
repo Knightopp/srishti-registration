@@ -74,14 +74,13 @@ export const TeamEventRegistration: React.FC<TeamEventRegistrationProps> = ({
       QRCode.toDataURL(upiString, {
         width: 180,
         margin: 1,
-        color: { dark: '#04060A', light: '#FFFFFF' },
+        color: { dark: '#040611', light: '#FFFFFF' },
       }).then(setUpiQrUrl).catch(() => {});
     } else {
       setUpiQrUrl('');
     }
   }, [event.fee, event.id, settings.upiId]);
 
-  // Teammate field change handler
   const handleTeammateChange = (index: number, field: keyof TeammateInfo, value: string) => {
     setTeammates((prev) => {
       const updated = [...prev];
@@ -184,24 +183,24 @@ export const TeamEventRegistration: React.FC<TeamEventRegistrationProps> = ({
       {/* Back Button */}
       <button
         onClick={onBack}
-        className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.06] hover:bg-white/[0.12] border border-white/12 text-white/80 hover:text-white text-xs font-['Outfit'] font-bold uppercase tracking-wider mb-6 transition-all cursor-pointer"
+        className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.08] hover:bg-white/[0.14] border border-white/12 text-white/80 hover:text-white text-xs font-['Outfit'] font-bold uppercase tracking-wider mb-6 transition-all cursor-pointer"
       >
         <ArrowLeft className="w-4 h-4" />
         <span>Back to Team Events</span>
       </button>
 
-      {/* Event Hero Showcase Banner with Luxury Aurora Gradient */}
-      <div className="card-layer-3 rounded-[32px] p-6 sm:p-8 mb-8 relative overflow-hidden shadow-2xl">
+      {/* Event Hero Showcase Banner with Dark Blue Glass */}
+      <div className="dark-blue-glass-glow rounded-[32px] p-6 sm:p-8 mb-8 relative overflow-hidden shadow-2xl">
         <div className="absolute top-0 right-0 w-80 h-80 bg-[#38BDF8]/20 rounded-full blur-3xl pointer-events-none" />
 
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="flex-1">
             <div className="flex flex-wrap items-center gap-2 mb-2.5">
-              <span className="px-3 py-1 rounded-full bg-black/50 border border-white/20 text-[#60A5FA] text-xs font-['Outfit'] font-bold uppercase tracking-wider">
+              <span className="px-3 py-1 rounded-full bg-black/60 border border-white/20 text-[#60A5FA] text-xs font-['Outfit'] font-bold uppercase tracking-wider">
                 {event.stageLabel}
               </span>
-              <span className="pill-growth-badge px-3 py-1 text-xs flex items-center gap-1.5">
-                <Users className="w-3.5 h-3.5" />
+              <span className="px-3 py-1 rounded-full bg-blue-500/25 border border-blue-400/40 text-[#93C5FD] text-xs font-['Outfit'] font-bold flex items-center gap-1.5 shadow-sm">
+                <Users className="w-3.5 h-3.5 text-[#38BDF8]" />
                 <span>{event.teamSize}</span>
               </span>
             </div>
@@ -209,7 +208,7 @@ export const TeamEventRegistration: React.FC<TeamEventRegistrationProps> = ({
             <h1 className="headline-display text-3xl sm:text-4xl text-white">
               {event.title}
             </h1>
-            <p className="text-xs sm:text-sm text-white/70 mt-2 font-normal max-w-xl leading-relaxed">
+            <p className="text-xs sm:text-sm text-white/75 mt-2 font-normal max-w-xl leading-relaxed">
               {event.highlightText || event.description}
             </p>
 
@@ -231,7 +230,7 @@ export const TeamEventRegistration: React.FC<TeamEventRegistrationProps> = ({
           </div>
 
           {/* Fee Card */}
-          <div className="pill-price-tag p-5 text-center shrink-0 min-w-[170px] bg-black/40 border-white/20">
+          <div className="frosted-pill-chip p-5 text-center shrink-0 min-w-[170px] bg-black/50 border-white/20">
             <span className="text-[10px] font-['Outfit'] text-white/50 uppercase tracking-widest block font-bold">
               TOTAL SQUAD FEE
             </span>
@@ -249,10 +248,10 @@ export const TeamEventRegistration: React.FC<TeamEventRegistrationProps> = ({
       <form onSubmit={handleSubmit} className="space-y-6">
         
         {/* SECTION 1: TEAM PROFILE */}
-        <div className="card-layer-1 rounded-[28px] p-6 sm:p-7 relative overflow-hidden">
+        <div className="dark-blue-glass rounded-[32px] p-6 sm:p-7 relative overflow-hidden">
           <div className="flex items-center gap-3.5 mb-6 pb-4 border-b border-white/[0.08]">
-            <div className="icon-circle-btn shrink-0">
-              <Users className="w-5 h-5 text-black" />
+            <div className="icon-glass-circle shrink-0 bg-blue-500/20 border-blue-400/30">
+              <Users className="w-5 h-5 text-[#93C5FD]" />
             </div>
             <div>
               <h2 className="font-['Outfit'] font-extrabold text-lg text-white">
@@ -275,7 +274,7 @@ export const TeamEventRegistration: React.FC<TeamEventRegistrationProps> = ({
                 value={teamName}
                 onChange={(e) => setTeamName(e.target.value)}
                 placeholder="e.g. Cyber Titans"
-                className="w-full bg-[#050810] border border-white/15 rounded-2xl px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#38BDF8] font-['Outfit'] transition-colors"
+                className="w-full bg-[#050B1A] border border-white/15 rounded-2xl px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#38BDF8] font-['Outfit'] transition-colors"
               />
             </div>
 
@@ -289,7 +288,7 @@ export const TeamEventRegistration: React.FC<TeamEventRegistrationProps> = ({
                 value={college}
                 onChange={(e) => setCollege(e.target.value)}
                 placeholder="e.g. St. Thomas College, Thrissur"
-                className="w-full bg-[#050810] border border-white/15 rounded-2xl px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#38BDF8] font-['Outfit'] transition-colors"
+                className="w-full bg-[#050B1A] border border-white/15 rounded-2xl px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#38BDF8] font-['Outfit'] transition-colors"
               />
             </div>
 
@@ -302,7 +301,7 @@ export const TeamEventRegistration: React.FC<TeamEventRegistrationProps> = ({
                 value={department}
                 onChange={(e) => setDepartment(e.target.value)}
                 placeholder="e.g. Computer Science"
-                className="w-full bg-[#050810] border border-white/15 rounded-2xl px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#38BDF8] font-['Outfit'] transition-colors"
+                className="w-full bg-[#050B1A] border border-white/15 rounded-2xl px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#38BDF8] font-['Outfit'] transition-colors"
               />
             </div>
 
@@ -313,7 +312,7 @@ export const TeamEventRegistration: React.FC<TeamEventRegistrationProps> = ({
               <select
                 value={year}
                 onChange={(e) => setYear(e.target.value)}
-                className="w-full bg-[#050810] border border-white/15 rounded-2xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#38BDF8] font-['Outfit'] transition-colors"
+                className="w-full bg-[#050B1A] border border-white/15 rounded-2xl px-4 py-3 text-sm text-white focus:outline-none focus:border-[#38BDF8] font-['Outfit'] transition-colors"
               >
                 <option value="1st Year">1st Year</option>
                 <option value="2nd Year">2nd Year</option>
@@ -326,17 +325,17 @@ export const TeamEventRegistration: React.FC<TeamEventRegistrationProps> = ({
         </div>
 
         {/* SECTION 2: TEAM LEADER */}
-        <div className="card-layer-2 rounded-[28px] p-6 sm:p-7 relative overflow-hidden">
+        <div className="dark-blue-glass rounded-[32px] p-6 sm:p-7 relative overflow-hidden">
           <div className="flex items-center gap-3.5 mb-6 pb-4 border-b border-white/[0.08]">
-            <div className="icon-circle-btn shrink-0">
-              <User className="w-5 h-5 text-black" />
+            <div className="icon-glass-circle shrink-0 bg-blue-500/20 border-blue-400/30">
+              <User className="w-5 h-5 text-[#93C5FD]" />
             </div>
             <div>
               <div className="flex items-center gap-2">
                 <h2 className="font-['Outfit'] font-extrabold text-lg text-white">
                   2. Team Leader (Member 1 - Primary Contact)
                 </h2>
-                <span className="pill-growth-badge px-2 py-0.5 text-[10px]">
+                <span className="px-2.5 py-0.5 rounded-full bg-blue-500/20 text-[#93C5FD] text-[10px] font-['Outfit'] font-bold">
                   Lead
                 </span>
               </div>
@@ -357,7 +356,7 @@ export const TeamEventRegistration: React.FC<TeamEventRegistrationProps> = ({
                 value={leaderName}
                 onChange={(e) => setLeaderName(e.target.value)}
                 placeholder="Full Name"
-                className="w-full bg-[#050810] border border-white/15 rounded-2xl px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#38BDF8] font-['Outfit']"
+                className="w-full bg-[#050B1A] border border-white/15 rounded-2xl px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#38BDF8] font-['Outfit']"
               />
             </div>
 
@@ -371,7 +370,7 @@ export const TeamEventRegistration: React.FC<TeamEventRegistrationProps> = ({
                 value={leaderEmail}
                 onChange={(e) => setLeaderEmail(e.target.value)}
                 placeholder="email@example.com"
-                className="w-full bg-[#050810] border border-white/15 rounded-2xl px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#38BDF8] font-['Outfit']"
+                className="w-full bg-[#050B1A] border border-white/15 rounded-2xl px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#38BDF8] font-['Outfit']"
               />
             </div>
 
@@ -385,18 +384,18 @@ export const TeamEventRegistration: React.FC<TeamEventRegistrationProps> = ({
                 value={leaderPhone}
                 onChange={(e) => setLeaderPhone(e.target.value)}
                 placeholder="+91 98765 43210"
-                className="w-full bg-[#050810] border border-white/15 rounded-2xl px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#38BDF8] font-['Outfit']"
+                className="w-full bg-[#050B1A] border border-white/15 rounded-2xl px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#38BDF8] font-['Outfit']"
               />
             </div>
           </div>
         </div>
 
         {/* SECTION 3: TEAMMATES DETAILS */}
-        <div className="card-layer-3 rounded-[28px] p-6 sm:p-7 relative overflow-hidden">
+        <div className="dark-blue-glass rounded-[32px] p-6 sm:p-7 relative overflow-hidden">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6 pb-4 border-b border-white/[0.08]">
             <div className="flex items-center gap-3.5">
-              <div className="icon-circle-btn shrink-0">
-                <Users className="w-5 h-5 text-black" />
+              <div className="icon-glass-circle shrink-0 bg-blue-500/20 border-blue-400/30">
+                <Users className="w-5 h-5 text-[#93C5FD]" />
               </div>
               <div>
                 <h2 className="font-['Outfit'] font-extrabold text-lg text-white">
@@ -412,7 +411,7 @@ export const TeamEventRegistration: React.FC<TeamEventRegistrationProps> = ({
               <button
                 type="button"
                 onClick={handleAddTeammate}
-                className="btn-white-action inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs uppercase tracking-wider cursor-pointer self-start sm:self-center"
+                className="btn-glass-white inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs uppercase tracking-wider cursor-pointer self-start sm:self-center"
               >
                 <Plus className="w-4 h-4" />
                 <span>Add Teammate</span>
@@ -424,7 +423,7 @@ export const TeamEventRegistration: React.FC<TeamEventRegistrationProps> = ({
             {teammates.map((teammate, idx) => (
               <div
                 key={idx}
-                className="p-5 rounded-2xl bg-black/40 border border-white/15 relative"
+                className="p-5 rounded-2xl bg-[#040816]/70 border border-white/15 relative"
               >
                 <div className="flex items-center justify-between mb-3 pb-2 border-b border-white/10">
                   <span className="font-['Outfit'] text-xs font-bold text-[#93C5FD] flex items-center gap-2">
@@ -457,7 +456,7 @@ export const TeamEventRegistration: React.FC<TeamEventRegistrationProps> = ({
                       value={teammate.name}
                       onChange={(e) => handleTeammateChange(idx, 'name', e.target.value)}
                       placeholder={`Teammate ${idx + 2} Name`}
-                      className="w-full bg-[#050810] border border-white/12 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder:text-white/30 focus:outline-none focus:border-[#38BDF8] font-['Outfit']"
+                      className="w-full bg-[#030612] border border-white/12 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder:text-white/30 focus:outline-none focus:border-[#38BDF8] font-['Outfit']"
                     />
                   </div>
 
@@ -470,7 +469,7 @@ export const TeamEventRegistration: React.FC<TeamEventRegistrationProps> = ({
                       value={teammate.email}
                       onChange={(e) => handleTeammateChange(idx, 'email', e.target.value)}
                       placeholder="teammate@example.com"
-                      className="w-full bg-[#050810] border border-white/12 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder:text-white/30 focus:outline-none focus:border-[#38BDF8] font-['Outfit']"
+                      className="w-full bg-[#030612] border border-white/12 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder:text-white/30 focus:outline-none focus:border-[#38BDF8] font-['Outfit']"
                     />
                   </div>
 
@@ -483,7 +482,7 @@ export const TeamEventRegistration: React.FC<TeamEventRegistrationProps> = ({
                       value={teammate.phone}
                       onChange={(e) => handleTeammateChange(idx, 'phone', e.target.value)}
                       placeholder="+91 Phone"
-                      className="w-full bg-[#050810] border border-white/12 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder:text-white/30 focus:outline-none focus:border-[#38BDF8] font-['Outfit']"
+                      className="w-full bg-[#030612] border border-white/12 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder:text-white/30 focus:outline-none focus:border-[#38BDF8] font-['Outfit']"
                     />
                   </div>
                 </div>
@@ -493,10 +492,10 @@ export const TeamEventRegistration: React.FC<TeamEventRegistrationProps> = ({
         </div>
 
         {/* SECTION 4: PAYMENT & QR CODE */}
-        <div className="card-layer-2 rounded-[28px] p-6 sm:p-7 relative overflow-hidden">
+        <div className="dark-blue-glass rounded-[32px] p-6 sm:p-7 relative overflow-hidden">
           <div className="flex items-center gap-3.5 mb-6 pb-4 border-b border-white/[0.08]">
-            <div className="icon-circle-btn shrink-0">
-              <QrCode className="w-5 h-5 text-black" />
+            <div className="icon-glass-circle shrink-0 bg-blue-500/20 border-blue-400/30">
+              <QrCode className="w-5 h-5 text-[#93C5FD]" />
             </div>
             <div>
               <h2 className="font-['Outfit'] font-extrabold text-lg text-white">
@@ -546,7 +545,7 @@ export const TeamEventRegistration: React.FC<TeamEventRegistrationProps> = ({
 
             {/* Right: Payment Amount & UTR Input */}
             <div className="space-y-4">
-              <div className="p-5 rounded-2xl bg-[#091024] border border-blue-500/30">
+              <div className="p-5 rounded-2xl bg-[#091530] border border-blue-500/30">
                 <div className="flex justify-between items-center text-xs font-['Outfit']">
                   <span className="text-white/60">Squad Challenge:</span>
                   <span className="text-white font-bold">{event.title}</span>
@@ -569,7 +568,7 @@ export const TeamEventRegistration: React.FC<TeamEventRegistrationProps> = ({
                   value={paymentUtr}
                   onChange={(e) => setPaymentUtr(e.target.value.toUpperCase())}
                   placeholder="e.g. 423871928371 or UTR-XXXXXX"
-                  className="w-full bg-[#050810] border border-white/15 rounded-2xl px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#38BDF8] font-['Outfit'] tracking-wider uppercase"
+                  className="w-full bg-[#050B1A] border border-white/15 rounded-2xl px-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#38BDF8] font-['Outfit'] tracking-wider uppercase"
                 />
                 <p className="text-[11px] text-white/40 font-['Outfit'] mt-1.5">
                   Available in your Google Pay, PhonePe, or Paytm confirmation screen.
@@ -597,7 +596,7 @@ export const TeamEventRegistration: React.FC<TeamEventRegistrationProps> = ({
           <button
             type="submit"
             disabled={isSubmitting}
-            className="btn-electric-blue w-full sm:w-auto px-8 py-3.5 rounded-full font-['Outfit'] font-extrabold text-xs uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+            className="btn-fluid-blue w-full sm:w-auto px-8 py-3.5 rounded-full font-['Outfit'] font-extrabold text-xs uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
           >
             <ShieldCheck className="w-4 h-4" />
             <span>{isSubmitting ? 'Issuing Team Pass...' : 'Register Team & Issue Pass'}</span>
