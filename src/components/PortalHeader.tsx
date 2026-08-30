@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowUpRight, Sparkles } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import srishtiLogo from '../assets/images/srishti-logo.png';
 import { useRegistration } from '../context/RegistrationContext';
 

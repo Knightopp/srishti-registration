@@ -1,5 +1,5 @@
 import React from 'react';
-import { User, Users, ArrowUpRight, Sparkles, X, Trophy } from 'lucide-react';
+import { User, Users, ArrowUpRight, X } from 'lucide-react';
 
 interface EventTypeModalProps {
   isOpen: boolean;
@@ -25,9 +25,9 @@ export const EventTypeModal: React.FC<EventTypeModalProps> = ({
         {/* Top Header Row with Stacked Typography */}
         <div className="flex items-start justify-between px-2">
           <div>
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/[0.08] border border-white/10 text-white/80 text-xs font-['Outfit'] font-semibold mb-2">
-              <Sparkles className="w-3.5 h-3.5 text-[#38BDF8]" />
-              <span>SRISHTI 2.7 ARENA SELECTION</span>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.06] border border-white/10 text-white/60 text-xs font-['Outfit'] font-medium mb-3">
+              <span className="w-2 h-2 rounded-full bg-[#38BDF8]" />
+              <span className="tracking-wider uppercase text-[11px] font-semibold text-white/80">EVENT TYPE SELECTION</span>
             </div>
 
             <h2 className="headline-display text-3xl sm:text-4xl text-white tracking-tight">

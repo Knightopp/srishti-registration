@@ -5,7 +5,6 @@ import {
   Calendar, 
   MapPin, 
   ArrowUpRight, 
-  Sparkles, 
   Search, 
   Layers
 } from 'lucide-react';
@@ -55,11 +54,12 @@ export const SoloEventsView: React.FC<SoloEventsViewProps> = ({
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 pb-6 border-b border-white/[0.08]">
         <div>
           <div className="flex items-center gap-2 mb-2">
-            <span className="pill-growth-badge px-3 py-1 text-xs">
-              ⚡ SOLO CHALLENGES
+            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.06] border border-white/10 text-[#93C5FD] text-xs font-['Outfit'] font-semibold">
+              <span className="w-2 h-2 rounded-full bg-[#38BDF8]" />
+              <span className="tracking-wider uppercase text-[11px]">SOLO EVENTS</span>
             </span>
             <span className="text-white/40 text-xs font-['Outfit']">
-              {soloEvents.length} Individual Arenas
+              {soloEvents.length} Challenges
             </span>
           </div>
 

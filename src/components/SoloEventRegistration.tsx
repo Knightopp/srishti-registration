@@ -10,7 +10,6 @@ import {
   Trophy,
   Calendar,
   MapPin,
-  Sparkles,
   ArrowUpRight
 } from 'lucide-react';
 import QRCode from 'qrcode';

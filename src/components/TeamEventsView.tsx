@@ -5,11 +5,8 @@ import {
   Calendar, 
   MapPin, 
   ArrowUpRight, 
-  Sparkles, 
   Search,
-  SlidersHorizontal,
-  Layers,
-  ArrowRight
+  Layers
 } from 'lucide-react';
 import { useRegistration } from '../context/RegistrationContext';
 import { EventItem } from '../types/registration';
@@ -58,11 +55,12 @@ export const TeamEventsView: React.FC<TeamEventsViewProps> = ({
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 pb-6 border-b border-white/[0.08]">
         <div>
           <div className="flex items-center gap-2 mb-2">
-            <span className="pill-growth-badge px-3 py-1 text-xs">
-              👥 TEAM SQUAD ARENAS
+            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.06] border border-white/10 text-[#93C5FD] text-xs font-['Outfit'] font-semibold">
+              <span className="w-2 h-2 rounded-full bg-[#2563EB]" />
+              <span className="tracking-wider uppercase text-[11px]">TEAM EVENTS</span>
             </span>
             <span className="text-white/40 text-xs font-['Outfit']">
-              {teamEvents.length} Squad Competitions
+              {teamEvents.length} Competitions
             </span>
           </div>
 

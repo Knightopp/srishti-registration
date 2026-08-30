@@ -7,8 +7,7 @@ import {
   ShieldCheck, 
   ArrowLeft,
   ArrowUpRight,
-  Users,
-  Sparkles
+  Users
 } from 'lucide-react';
 import html2canvas from 'html2canvas';
 import confetti from 'canvas-confetti';
