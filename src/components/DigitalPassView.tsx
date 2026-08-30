@@ -168,11 +168,41 @@ export const DigitalPassView: React.FC<DigitalPassViewProps> = ({
             <div className="sm:col-span-2 space-y-4">
               <div>
                 <span className="font-['IBM_Plex_Mono'] text-[10px] text-white/40 uppercase tracking-wider block">
-                  PARTICIPANT NAME
+                  {record.isTeamRegistration || record.teamName ? 'TEAM & LEADER' : 'PARTICIPANT NAME'}
                 </span>
-                <p className="font-['Montserrat'] font-extrabold text-xl text-white mt-0.5">{record.fullName}</p>
+                <div className="flex flex-wrap items-baseline gap-2 mt-0.5">
+                  <p className="font-['Montserrat'] font-extrabold text-xl text-white">
+                    {record.fullName}
+                  </p>
+                  {record.teamName && (
+                    <span className="px-2 py-0.5 rounded-md bg-blue-500/20 text-blue-300 font-['IBM_Plex_Mono'] text-xs font-bold border border-blue-400/30">
+                      Team {record.teamName}
+                    </span>
+                  )}
+                </div>
                 <p className="font-['IBM_Plex_Mono'] text-xs text-white/50">{record.email} • {record.phone}</p>
               </div>
+
+              {/* Team Roster section if team registration */}
+              {record.teammates && record.teammates.length > 0 && (
+                <div className="p-3 rounded-xl bg-white/[0.03] border border-white/[0.08]">
+                  <span className="font-['IBM_Plex_Mono'] text-[10px] text-[#38BDF8] uppercase tracking-wider block mb-1.5 font-bold">
+                    TEAM MEMBERS ROSTER ({record.teammates.length + 1} MEMBERS)
+                  </span>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 text-xs">
+                    <div className="flex items-center gap-1.5 text-white/90 font-medium">
+                      <span className="text-[#38BDF8] font-bold font-['IBM_Plex_Mono'] text-[11px]">1.</span>
+                      <span className="truncate">{record.fullName} <span className="text-[10px] text-white/40">(Lead)</span></span>
+                    </div>
+                    {record.teammates.map((tm, idx) => (
+                      <div key={idx} className="flex items-center gap-1.5 text-white/80 font-medium truncate">
+                        <span className="text-white/40 font-bold font-['IBM_Plex_Mono'] text-[11px]">{idx + 2}.</span>
+                        <span className="truncate">{tm.name}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
 
               <div className="grid grid-cols-2 gap-3 pt-1 text-xs">
                 <div>
@@ -191,7 +221,7 @@ export const DigitalPassView: React.FC<DigitalPassViewProps> = ({
                     {record.totalFee === 0 ? 'FREE PASS' : `PAID PASS (₹${record.totalFee})`}
                   </p>
                   <p className="text-white/50">
-                    {record.teamName ? `Team: ${record.teamName}` : 'Individual'}
+                    {record.teamName ? `Squad Pass` : 'Individual Pass'}
                   </p>
                 </div>
               </div>

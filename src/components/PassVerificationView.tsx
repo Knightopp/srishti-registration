@@ -130,9 +130,14 @@ export const PassVerificationView: React.FC<PassVerificationViewProps> = ({ init
               {/* Data Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 my-6 text-xs">
                 <div className="p-3.5 rounded-2xl bg-[#0D1015] border border-white/[0.06] space-y-1">
-                  <span className="font-['IBM_Plex_Mono'] text-[10px] text-white/40 uppercase tracking-wider block">INSTITUTION</span>
+                  <span className="font-['IBM_Plex_Mono'] text-[10px] text-white/40 uppercase tracking-wider block">
+                    {activeRecord.isTeamRegistration || activeRecord.teamName ? 'TEAM & INSTITUTION' : 'INSTITUTION'}
+                  </span>
                   <p className="font-semibold text-white truncate">{activeRecord.college}</p>
-                  <p className="text-white/50">{activeRecord.department} • {activeRecord.year}</p>
+                  <p className="text-white/50">
+                    {activeRecord.teamName ? `Team: ${activeRecord.teamName} • ` : ''}
+                    {activeRecord.department} • {activeRecord.year}
+                  </p>
                 </div>
 
                 <div className="p-3.5 rounded-2xl bg-[#0D1015] border border-white/[0.06] space-y-1">
@@ -141,6 +146,27 @@ export const PassVerificationView: React.FC<PassVerificationViewProps> = ({ init
                   <p className="font-['IBM_Plex_Mono'] text-[11px] text-[#38BDF8]">Hash: {activeRecord.securityHash}</p>
                 </div>
               </div>
+
+              {/* Team Members Roster if Present */}
+              {activeRecord.teammates && activeRecord.teammates.length > 0 && (
+                <div className="mb-6 p-4 rounded-2xl bg-[#0D1015] border border-white/[0.06]">
+                  <span className="font-['IBM_Plex_Mono'] text-[10px] text-[#38BDF8] uppercase tracking-wider block mb-2 font-bold">
+                    TEAM MEMBERS ROSTER ({activeRecord.teammates.length + 1} MEMBERS)
+                  </span>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                    <div className="flex items-center gap-2 text-white">
+                      <span className="text-[#38BDF8] font-bold font-['IBM_Plex_Mono']">1.</span>
+                      <span>{activeRecord.fullName} <span className="text-white/40 text-[10px]">(Leader)</span></span>
+                    </div>
+                    {activeRecord.teammates.map((tm, idx) => (
+                      <div key={idx} className="flex items-center gap-2 text-white/80">
+                        <span className="text-white/40 font-bold font-['IBM_Plex_Mono']">{idx + 2}.</span>
+                        <span>{tm.name}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
 
               {/* Events Registered */}
               <div className="mb-6">

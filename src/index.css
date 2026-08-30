@@ -125,3 +125,35 @@
     page-break-inside: avoid;
   }
 }
+
+/* Dual Box Slide Animations */
+@keyframes slideDownIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-80px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes slideUpIn {
+  0% {
+    opacity: 0;
+    transform: translateY(80px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-slide-down-in {
+  animation: slideDownIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slide-up-in {
+  animation: slideUpIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+

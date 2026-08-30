@@ -1,9 +1,22 @@
+export interface TeammateInfo {
+  name: string;
+  email?: string;
+  phone?: string;
+  college?: string;
+  department?: string;
+  year?: string;
+}
+
 export interface EventItem {
   id: string;
   number: string;
   stageLabel: string;
   title: string;
   category: string;
+  eventType: 'solo' | 'team';
+  teamSize?: string; // e.g. "Squad of 4", "Team (Max 4)", "Solo", "Duo / Solo"
+  minTeamSize?: number;
+  maxTeamSize?: number;
   highlightText: string;
   description: string;
   time: string;
@@ -14,7 +27,6 @@ export interface EventItem {
   bgGradient: string;
   image: string;
   fee: number; // in INR (0 for free)
-  teamSize?: string; // Team requirement e.g. Team of 4, Solo
   isParticipating?: boolean;
   day?: 'dec-4' | 'dec-5';
   dayLabel?: string;
@@ -39,6 +51,8 @@ export interface RegistrationRecord {
   department: string;
   year: string;
   teamName?: string;
+  isTeamRegistration?: boolean;
+  teammates?: TeammateInfo[];
   selectedEventIds: string[];
   selectedEventNames: string[];
   totalFee: number;
@@ -69,3 +83,4 @@ export interface SystemSettings {
   cloudDbUrl: string;
   mainSiteUrl: string;
 }
+
