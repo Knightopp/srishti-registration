@@ -23,30 +23,32 @@ export const PortalHeader: React.FC<PortalHeaderProps> = ({
   };
 
   return (
-    <header className="sticky top-3.5 z-50 w-full px-3 flex justify-center pointer-events-none mb-5">
-      {/* Short, compact, perfectly-proportioned floating pill */}
-      <div className="glass-nav-pill pointer-events-auto rounded-full px-3 sm:px-4 py-1.5 flex items-center justify-between gap-3 sm:gap-5 max-w-lg w-auto shadow-2xl border border-white/15">
+    <header className="sticky top-4 z-50 w-full px-4 flex justify-center pointer-events-none mb-6">
+      {/* Sleek, luxury floating capsule */}
+      <div className="glass-nav-pill pointer-events-auto rounded-full px-3.5 sm:px-5 py-2 flex items-center justify-between gap-3 sm:gap-6 max-w-lg w-auto shadow-2xl">
         
         {/* Brand Identity: Logo + srishti 2.7 */}
         <div 
-          className="flex items-center gap-2 cursor-pointer select-none" 
+          className="flex items-center gap-2.5 cursor-pointer select-none group" 
           onClick={() => onSelectTab('register')}
           title="Srishti 2.7 Portal"
         >
-          <div className="w-6 h-6 rounded-lg p-0.5 bg-white/5 border border-white/10 flex items-center justify-center shrink-0">
+          <div className="w-7 h-7 rounded-xl p-1 bg-white/10 border border-white/15 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
             <img src={srishtiLogo} alt="Srishti" className="w-full h-full object-contain" />
           </div>
-          <span className="font-['Montserrat'] font-black text-xs sm:text-sm tracking-tight text-white whitespace-nowrap">
-            srishti<span className="text-[#38BDF8] ml-0.5 font-['IBM_Plex_Mono']">2.7</span>
+          <span className="font-['Outfit'] font-black text-sm sm:text-base tracking-tight text-white whitespace-nowrap">
+            srishti<span className="text-[#38BDF8] ml-1 font-['Outfit'] font-semibold">2.7</span>
           </span>
         </div>
 
-        {/* Navigation Tabs & Active Mode */}
-        <nav className="flex items-center gap-3 sm:gap-4 text-[11px] font-['Montserrat'] font-bold tracking-wider uppercase">
+        {/* Navigation Tabs (Fintech Timeframe Pill Style) */}
+        <nav className="flex items-center gap-1 bg-white/[0.06] p-1 rounded-full border border-white/10 text-xs font-['Outfit'] font-bold">
           <button
             onClick={() => onSelectTab('register')}
-            className={`transition-colors cursor-pointer whitespace-nowrap ${
-              currentTab === 'register' ? 'text-[#38BDF8]' : 'text-white/60 hover:text-white'
+            className={`px-3 py-1 rounded-full transition-all cursor-pointer whitespace-nowrap ${
+              currentTab === 'register' 
+                ? 'bg-[#2563EB] text-white shadow-md' 
+                : 'text-white/60 hover:text-white'
             }`}
           >
             Passes
@@ -54,21 +56,23 @@ export const PortalHeader: React.FC<PortalHeaderProps> = ({
 
           <button
             onClick={() => onSelectTab('verify')}
-            className={`transition-colors cursor-pointer whitespace-nowrap ${
-              currentTab === 'verify' ? 'text-[#38BDF8]' : 'text-white/60 hover:text-white'
+            className={`px-3 py-1 rounded-full transition-all cursor-pointer whitespace-nowrap ${
+              currentTab === 'verify' 
+                ? 'bg-[#2563EB] text-white shadow-md' 
+                : 'text-white/60 hover:text-white'
             }`}
           >
             Verify
           </button>
         </nav>
 
-        {/* Fest Website Button */}
+        {/* Fest Website Button (Clean White Action Pill) */}
         <button
           onClick={handleReturnToMainSite}
-          className="px-3 py-1.5 rounded-full bg-gradient-27-glow text-white font-['Montserrat'] text-[10px] sm:text-[11px] font-bold uppercase tracking-wider hover:opacity-90 transition-opacity flex items-center gap-1 cursor-pointer leading-none whitespace-nowrap"
+          className="btn-white-action px-3.5 py-1.5 rounded-full text-[11px] sm:text-xs uppercase tracking-wider flex items-center gap-1.5 cursor-pointer leading-none whitespace-nowrap"
         >
           <span>Fest Site</span>
-          <ArrowUpRight className="w-3 h-3" />
+          <ArrowUpRight className="w-3.5 h-3.5" />
         </button>
 
       </div>

@@ -6,7 +6,9 @@ import {
   Check, 
   ShieldCheck, 
   ArrowLeft,
-  ArrowUpRight
+  ArrowUpRight,
+  Users,
+  Sparkles
 } from 'lucide-react';
 import html2canvas from 'html2canvas';
 import confetti from 'canvas-confetti';
@@ -30,10 +32,10 @@ export const DigitalPassView: React.FC<DigitalPassViewProps> = ({
   useEffect(() => {
     try {
       confetti({
-        particleCount: 70,
-        spread: 60,
+        particleCount: 80,
+        spread: 70,
         origin: { y: 0.6 },
-        colors: ['#38BDF8', '#2563EB', '#7DD3FC', '#FFFFFF'],
+        colors: ['#2563EB', '#38BDF8', '#60A5FA', '#FFFFFF', '#4F46E5'],
       });
     } catch {}
   }, []);
@@ -47,7 +49,7 @@ export const DigitalPassView: React.FC<DigitalPassViewProps> = ({
       const canvas = await html2canvas(passCardRef.current, {
         scale: 3,
         useCORS: true,
-        backgroundColor: '#050608',
+        backgroundColor: '#000000',
         logging: false,
       });
       const link = document.createElement('a');
@@ -74,26 +76,27 @@ export const DigitalPassView: React.FC<DigitalPassViewProps> = ({
   return (
     <div className="w-full max-w-3xl mx-auto px-4 py-8">
       
-      {/* Confirmed Header */}
+      {/* Confirmed Header with Fintech Typography */}
       <div className="text-center mb-8">
-        <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-[#38BDF8] font-['IBM_Plex_Mono'] text-xs font-bold mb-3">
-          <ShieldCheck className="w-3.5 h-3.5" />
-          <span>PASS ISSUED & VERIFIED</span>
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/20 border border-blue-400/30 text-[#93C5FD] font-['Outfit'] text-xs font-bold mb-3">
+          <ShieldCheck className="w-4 h-4 text-[#38BDF8]" />
+          <span>OFFICIAL DIGITAL ACCESS BADGE</span>
         </div>
-        <h1 className="font-['Montserrat'] font-black text-3xl sm:text-4xl text-white tracking-tight uppercase">
-          Official Entry Pass
+        <h1 className="headline-display text-4xl sm:text-5xl text-white">
+          Access Granted.<br />
+          <span className="text-[#38BDF8]">Pass Issued.</span>
         </h1>
-        <p className="text-xs sm:text-sm text-white/50 mt-2 max-w-md mx-auto font-light">
-          Save this pass on your phone or present the QR code at the registration desk for instant campus access.
+        <p className="text-xs sm:text-sm text-white/60 mt-2 max-w-md mx-auto font-normal">
+          Present this verifiable badge at the registration gate for fast-track campus access.
         </p>
       </div>
 
-      {/* Action Toolbar */}
+      {/* Action Toolbar with White & Electric Pill Buttons */}
       <div className="flex flex-wrap items-center justify-center gap-3 mb-8 no-print">
         <button
           onClick={handleDownloadImage}
           disabled={isDownloading}
-          className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-27-glow text-white font-['Montserrat'] font-bold text-xs uppercase tracking-wider transition-all cursor-pointer shadow-lg hover:opacity-90"
+          className="btn-electric-blue flex items-center gap-2 px-6 py-3 rounded-full font-['Outfit'] font-bold text-xs uppercase tracking-wider cursor-pointer"
         >
           <Download className="w-4 h-4" />
           <span>{isDownloading ? 'Exporting...' : 'Download Pass (PNG)'}</span>
@@ -101,15 +104,15 @@ export const DigitalPassView: React.FC<DigitalPassViewProps> = ({
 
         <button
           onClick={handlePrint}
-          className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-white/[0.06] hover:bg-white/[0.1] text-white font-['Montserrat'] font-semibold text-xs border border-white/10 transition-all cursor-pointer"
+          className="btn-white-action flex items-center gap-2 px-5 py-3 rounded-full text-xs uppercase tracking-wider cursor-pointer"
         >
-          <Printer className="w-4 h-4 text-white/60" />
+          <Printer className="w-4 h-4" />
           <span>Print</span>
         </button>
 
         <button
           onClick={handleCopyShareLink}
-          className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-white/[0.06] hover:bg-white/[0.1] text-white font-['Montserrat'] font-semibold text-xs border border-white/10 transition-all cursor-pointer"
+          className="flex items-center gap-2 px-5 py-3 rounded-full bg-white/[0.08] hover:bg-white/[0.14] text-white font-['Outfit'] font-bold text-xs border border-white/15 transition-all cursor-pointer"
         >
           {copiedLink ? (
             <>
@@ -118,44 +121,44 @@ export const DigitalPassView: React.FC<DigitalPassViewProps> = ({
             </>
           ) : (
             <>
-              <Share2 className="w-4 h-4 text-white/60" />
+              <Share2 className="w-4 h-4 text-white/70" />
               <span>Copy Link</span>
             </>
           )}
         </button>
       </div>
 
-      {/* Printable / Capturable Pass Card */}
+      {/* Printable / Capturable Pass Card (Styled like Luxury Crypto Asset Card in Screenshot) */}
       <div className="flex justify-center">
         <div
           ref={passCardRef}
           id="srishti-pass-card"
-          className="w-full max-w-xl bg-gradient-to-b from-[#0d131f] via-[#080c14] to-[#050608] rounded-3xl border border-white/15 shadow-2xl p-6 sm:p-8 relative overflow-hidden text-white printable-pass-card"
+          className="w-full max-w-xl card-layer-3 rounded-[32px] p-6 sm:p-8 relative overflow-hidden text-white printable-pass-card shadow-2xl border border-white/20"
         >
-          {/* Subtle Atmospheric Light Glow */}
-          <div className="absolute top-0 right-0 w-72 h-72 bg-[#2563EB]/15 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute bottom-0 left-0 w-72 h-72 bg-[#38BDF8]/10 rounded-full blur-3xl pointer-events-none" />
+          {/* Luminous Atmospheric Diffused Aurora Glow (Inspired by Reference Screenshot) */}
+          <div className="absolute bottom-0 right-0 w-80 h-80 bg-[#2563EB]/35 rounded-full blur-[80px] pointer-events-none" />
+          <div className="absolute top-0 left-0 w-60 h-60 bg-[#4F46E5]/20 rounded-full blur-[70px] pointer-events-none" />
 
           {/* Header Row */}
-          <div className="relative z-10 flex items-start justify-between border-b border-white/10 pb-5">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-xl bg-white/10 p-1.5 border border-white/15 flex items-center justify-center">
+          <div className="relative z-10 flex items-start justify-between border-b border-white/12 pb-5">
+            <div className="flex items-center gap-3.5">
+              <div className="w-12 h-12 rounded-2xl bg-white/10 p-2 border border-white/20 flex items-center justify-center">
                 <img src={srishtiLogo} alt="Srishti" className="w-full h-full object-contain" />
               </div>
               <div>
-                <span className="font-['IBM_Plex_Mono'] text-[10px] uppercase tracking-widest text-[#38BDF8] block font-bold">
+                <span className="font-['Outfit'] text-[10px] uppercase tracking-widest text-[#93C5FD] block font-bold">
                   OFFICIAL ACCESS BADGE
                 </span>
-                <h2 className="font-['Montserrat'] font-black text-2xl text-white tracking-tight">
+                <h2 className="font-['Outfit'] font-black text-2xl text-white tracking-tight">
                   SRISHTI <span className="text-[#38BDF8]">2.7</span>
                 </h2>
-                <span className="font-['IBM_Plex_Mono'] text-[11px] text-white/50">Dec 4–5, 2026 • St. Thomas College</span>
+                <span className="font-['Outfit'] text-xs text-white/60">Dec 4–5, 2026 • St. Thomas College</span>
               </div>
             </div>
 
-            <div className="text-right font-['IBM_Plex_Mono']">
-              <span className="text-[10px] text-white/40 uppercase tracking-wider block">PASS ID</span>
-              <span className="text-base sm:text-lg font-black text-[#38BDF8] bg-sky-500/10 px-3 py-1 rounded-xl border border-sky-500/30 inline-block mt-0.5">
+            <div className="text-right">
+              <span className="text-[10px] text-white/40 uppercase tracking-widest block font-['Outfit'] font-bold">PASS ID</span>
+              <span className="text-base sm:text-lg font-black text-white bg-white/10 px-3.5 py-1 rounded-full border border-white/20 inline-block mt-0.5 font-['IBM_Plex_Mono']">
                 {record.passId}
               </span>
             </div>
@@ -164,39 +167,40 @@ export const DigitalPassView: React.FC<DigitalPassViewProps> = ({
           {/* Attendee Info Grid */}
           <div className="relative z-10 grid grid-cols-1 sm:grid-cols-3 gap-6 my-6">
             
-            {/* Left 2 Cols: Details */}
+            {/* Left 2 Cols */}
             <div className="sm:col-span-2 space-y-4">
               <div>
-                <span className="font-['IBM_Plex_Mono'] text-[10px] text-white/40 uppercase tracking-wider block">
+                <span className="font-['Outfit'] text-[10px] text-white/50 uppercase tracking-widest block font-bold">
                   {record.isTeamRegistration || record.teamName ? 'TEAM & LEADER' : 'PARTICIPANT NAME'}
                 </span>
                 <div className="flex flex-wrap items-baseline gap-2 mt-0.5">
-                  <p className="font-['Montserrat'] font-extrabold text-xl text-white">
+                  <p className="font-['Outfit'] font-black text-2xl text-white">
                     {record.fullName}
                   </p>
                   {record.teamName && (
-                    <span className="px-2 py-0.5 rounded-md bg-blue-500/20 text-blue-300 font-['IBM_Plex_Mono'] text-xs font-bold border border-blue-400/30">
+                    <span className="px-2.5 py-0.5 rounded-full bg-blue-500/25 text-[#93C5FD] font-['Outfit'] text-xs font-bold border border-blue-400/40">
                       Team {record.teamName}
                     </span>
                   )}
                 </div>
-                <p className="font-['IBM_Plex_Mono'] text-xs text-white/50">{record.email} • {record.phone}</p>
+                <p className="font-['Outfit'] text-xs text-white/60 mt-0.5">{record.email} • {record.phone}</p>
               </div>
 
               {/* Team Roster section if team registration */}
               {record.teammates && record.teammates.length > 0 && (
-                <div className="p-3 rounded-xl bg-white/[0.03] border border-white/[0.08]">
-                  <span className="font-['IBM_Plex_Mono'] text-[10px] text-[#38BDF8] uppercase tracking-wider block mb-1.5 font-bold">
-                    TEAM MEMBERS ROSTER ({record.teammates.length + 1} MEMBERS)
+                <div className="p-4 rounded-2xl bg-black/40 border border-white/15">
+                  <span className="font-['Outfit'] text-[11px] text-[#93C5FD] uppercase tracking-wider block mb-2 font-bold flex items-center gap-1.5">
+                    <Users className="w-3.5 h-3.5" />
+                    <span>TEAM ROSTER ({record.teammates.length + 1} SQUAD MEMBERS)</span>
                   </span>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 text-xs">
-                    <div className="flex items-center gap-1.5 text-white/90 font-medium">
-                      <span className="text-[#38BDF8] font-bold font-['IBM_Plex_Mono'] text-[11px]">1.</span>
-                      <span className="truncate">{record.fullName} <span className="text-[10px] text-white/40">(Lead)</span></span>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-['Outfit']">
+                    <div className="flex items-center gap-2 text-white font-semibold">
+                      <span className="w-5 h-5 rounded-full bg-[#2563EB] text-white flex items-center justify-center text-[10px] font-bold">1</span>
+                      <span className="truncate">{record.fullName} <span className="text-white/40 text-[10px] font-normal">(Lead)</span></span>
                     </div>
                     {record.teammates.map((tm, idx) => (
-                      <div key={idx} className="flex items-center gap-1.5 text-white/80 font-medium truncate">
-                        <span className="text-white/40 font-bold font-['IBM_Plex_Mono'] text-[11px]">{idx + 2}.</span>
+                      <div key={idx} className="flex items-center gap-2 text-white/80 font-medium truncate">
+                        <span className="w-5 h-5 rounded-full bg-white/10 text-white/60 flex items-center justify-center text-[10px] font-bold">{idx + 2}</span>
                         <span className="truncate">{tm.name}</span>
                       </div>
                     ))}
@@ -204,38 +208,38 @@ export const DigitalPassView: React.FC<DigitalPassViewProps> = ({
                 </div>
               )}
 
-              <div className="grid grid-cols-2 gap-3 pt-1 text-xs">
+              <div className="grid grid-cols-2 gap-3 pt-1 text-xs font-['Outfit']">
                 <div>
-                  <span className="font-['IBM_Plex_Mono'] text-[10px] text-white/40 uppercase tracking-wider block">
+                  <span className="text-[10px] text-white/40 uppercase tracking-widest block font-bold">
                     INSTITUTION
                   </span>
-                  <p className="font-semibold text-white mt-0.5 truncate">{record.college}</p>
-                  <p className="text-white/50">{record.department} ({record.year})</p>
+                  <p className="font-bold text-white mt-0.5 truncate">{record.college}</p>
+                  <p className="text-white/60">{record.department} ({record.year})</p>
                 </div>
 
                 <div>
-                  <span className="font-['IBM_Plex_Mono'] text-[10px] text-white/40 uppercase tracking-wider block">
+                  <span className="text-[10px] text-white/40 uppercase tracking-widest block font-bold">
                     PASS TYPE
                   </span>
-                  <p className="font-['IBM_Plex_Mono'] font-bold text-[#38BDF8] mt-0.5">
+                  <p className="font-bold text-[#60A5FA] mt-0.5">
                     {record.totalFee === 0 ? 'FREE PASS' : `PAID PASS (₹${record.totalFee})`}
                   </p>
-                  <p className="text-white/50">
+                  <p className="text-white/60">
                     {record.teamName ? `Squad Pass` : 'Individual Pass'}
                   </p>
                 </div>
               </div>
 
-              {/* Claimed Events List */}
-              <div className="pt-2">
-                <span className="font-['IBM_Plex_Mono'] text-[10px] text-white/40 uppercase tracking-wider block mb-1.5">
-                  REGISTERED EVENTS ({record.selectedEventNames.length})
+              {/* Claimed Events */}
+              <div className="pt-1">
+                <span className="font-['Outfit'] text-[10px] text-white/40 uppercase tracking-widest block mb-2 font-bold">
+                  REGISTERED CHALLENGES ({record.selectedEventNames.length})
                 </span>
                 <div className="flex flex-wrap gap-1.5">
                   {record.selectedEventNames.map((name, idx) => (
                     <span 
                       key={idx} 
-                      className="px-2.5 py-0.5 rounded-md bg-white/5 border border-white/10 text-[11px] font-medium text-sky-200"
+                      className="px-3 py-1 rounded-full bg-white/10 border border-white/15 text-xs font-semibold text-[#93C5FD] font-['Outfit']"
                     >
                       {name}
                     </span>
@@ -244,14 +248,14 @@ export const DigitalPassView: React.FC<DigitalPassViewProps> = ({
               </div>
             </div>
 
-            {/* Right Col: Verified Center-Logo QR */}
-            <div className="flex flex-col items-center justify-center p-3 rounded-2xl bg-[#080c14] border border-white/10">
+            {/* Right Col: QR Code */}
+            <div className="flex flex-col items-center justify-center p-4 rounded-2xl bg-black/50 border border-white/15">
               <CustomSrishtiQR value={verificationUrl} size={135} />
-              <div className="mt-2 text-center font-['IBM_Plex_Mono']">
-                <span className="text-[9px] text-[#38BDF8] uppercase font-bold tracking-wider flex items-center justify-center gap-1">
-                  <ShieldCheck className="w-3 h-3" /> VERIFIED BADGE
+              <div className="mt-3 text-center font-['Outfit']">
+                <span className="text-[10px] text-[#38BDF8] uppercase font-bold tracking-wider flex items-center justify-center gap-1">
+                  <ShieldCheck className="w-3.5 h-3.5" /> VERIFIED BADGE
                 </span>
-                <span className="text-[8px] text-white/40 block truncate max-w-[125px] mt-0.5">
+                <span className="text-[9px] text-white/40 block truncate max-w-[125px] mt-0.5 font-['IBM_Plex_Mono']">
                   {record.securityHash}
                 </span>
               </div>
@@ -259,12 +263,12 @@ export const DigitalPassView: React.FC<DigitalPassViewProps> = ({
 
           </div>
 
-          {/* Tear Strip Bottom Bar */}
-          <div className="relative z-10 pt-4 border-t border-dashed border-white/20 flex items-center justify-between font-['IBM_Plex_Mono'] text-[11px] text-white/50">
+          {/* Bottom Bar */}
+          <div className="relative z-10 pt-4 border-t border-dashed border-white/20 flex items-center justify-between font-['Outfit'] text-xs text-white/60">
             <div>
               <span>Dec 4–5, 2026 • Main Campus</span>
             </div>
-            <div className="text-[10px] text-white/40">
+            <div className="text-[11px] text-white/40 font-['IBM_Plex_Mono']">
               Issued: {new Date(record.registeredAt).toLocaleDateString()}
             </div>
           </div>
@@ -277,10 +281,10 @@ export const DigitalPassView: React.FC<DigitalPassViewProps> = ({
         <div className="text-center mt-8 no-print">
           <button
             onClick={onNewRegistration}
-            className="inline-flex items-center gap-2 font-['Montserrat'] text-xs font-bold uppercase tracking-wider text-white/60 hover:text-white transition-colors cursor-pointer"
+            className="inline-flex items-center gap-2 font-['Outfit'] text-xs font-bold uppercase tracking-wider text-white/60 hover:text-white transition-colors cursor-pointer"
           >
-            <ArrowLeft className="w-3.5 h-3.5" />
-            <span>Register another participant</span>
+            <ArrowLeft className="w-4 h-4" />
+            <span>Register another participant / squad</span>
           </button>
         </div>
       )}
